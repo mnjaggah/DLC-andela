@@ -13,7 +13,7 @@ class User(Base):
     __tablename__ = "users"
     email = Column(String(50), primary_key=True, autoincrement=False)
     firstname = Column(String(20))
-    surname = Column(String(20))
+    lastname = Column(String(20))
     pwdhash = Column(String(20))
     role = Column(String(10))
 
