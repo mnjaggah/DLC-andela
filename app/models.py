@@ -2,10 +2,9 @@
 from sqlalchemy import Column, String, create_engine
 from sqlalchemy.ext.declarative import declarative_base
 from werkzeug.security import generate_password_hash, check_password_hash
+from app import db
+from app import login_manager
 
-Base = declarative_base()
-engine = create_engine("sqlite:///Andela-DLC.db")
-Base.metadata.bind = engine
 
 class User(Base):
     """The class User will be used to create a table that
@@ -39,6 +38,6 @@ class User(Base):
         admin roles to a user"""
         self.role = "Admin"
 
-Base.metadata.create_all(engine)
+
 
 
