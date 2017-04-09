@@ -26,7 +26,7 @@ def index():
 @app.route('/dashboard')
 @login_required
 def dashboard():
-    return render_template('base.html')
+    return render_template('dashboard.html')
 
 
 @app.route('/login', methods=['GET', 'POST'])

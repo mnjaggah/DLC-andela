@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+{% block title %}
+My Dashboard | Welcome
+{% endblock %}
+{% block content %}
+
+<div id="table-datatables">
+              <h4 class="header">Andela DLC Learners</h4>
+              <div class="row">
+                <div class="col s11">
+                  <table id="data-table-simple" class="responsive-table display" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Level</th>
+                            <th>Progress</th>
+                            <th>Test</th>
+                            <th>Language</th>
+                            <th>Facilitator </th>
+                        </tr>
+                    </thead>
+                 
+                    <tbody>
+                        <tr>
+                            <td>Jimmy Kimani</td>
+                            <td>Professional </td>
+                            <td>80%</td>
+                            <td>Amity</td>
+                            <td>CLI Python</td>
+                            <td>Musomi</td>
+                        </tr>
+                        <tr>
+                            <td>Oscar Maina</td>
+                            <td>Professional</td>
+                            <td>75%</td>
+                            <td>Issue Tracker</td>
+                            <td>Flask</td>
+                            <td>Ian</td>
+                        </tr>
+                        <tr>
+                            <td>Achesa M</td>
+                            <td>Professional</td>
+                            <td>20%</td>
+                            <td>Online Shop</td>
+                            <td>Flask</td>
+                            <td>Jimmy</td>
+                        </tr>
+                        <tr>
+                            <td>Maria M</td>
+                            <td>Beginner</td>
+                            <td>20%</td>
+                            <td>Kanban</td>
+                            <td>CLI Python</td>
+                            <td>Jimmy</td>
+                        </tr>
+                        {% endblock %}  
