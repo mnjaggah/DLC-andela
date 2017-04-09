@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <!--Import Google Icon Font-->
+    <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.1/css/materialize.min.css">
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.1/js/materialize.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="../static/main.css" />
+    <link rel="stylesheet" href="../static/materialize.min.css" />
+    <!--<link type="text/css" rel="stylesheet" href="css/main.css"/>-->
+    <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script type="text/javascript" src="../static/main.js"></script>
+    <!--<script type="text/javascript" src="../static/js/materialize.min.js"><-->
+
+    <!-- to Let browser know website is optimized for mobile-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+</head>
+<header>
+
+    <body>
+        <div class="preloader-background">
+            <div class="preloader-wrapper big active">
+                <div class="spinner-layer spinner-blue-only">
+                    <div class="circle-clipper left">
+                        <div class="circle"></div>
+                    </div>
+                    <div class="gap-patch">
+                        <div class="circle"></div>
+                    </div>
+                    <div class="circle-clipper right">
+                        <div class="circle"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="main">
+            <div class="header-container">
+                <ul id="dropdown1" class="dropdown-content">
+                    <li><a href="#!">one</a></li>
+                    <li><a href="#!">two</a></li>
+                    <li class="divider"></li>
+                    <li><a href="{{ url_for('logout')}}">Log out</a></li>
+                </ul>
+                <nav>
+                    <div class="navbar-fixed">
+                        <div class="nav-wrapper">
+                            <a href="#!" class="brand-logo">Andela DLC</a>
+                            <a href="#" data-activates="slide-out" class="button-collapse"><i class="material-icons">menu</i></a>
+                            <ul class="right hide-on-med-and-down">
+
+                                <li>
+                                    <a href="sass.html" class="tooltipped" data-postion="bottom" data-delay="50" data-tooltip='search issue'>
+                                        <i class="material-icons">search</i></a>
+                                </li>
+                                <li><a href="badges.html"><i class="material-icons">view_module</i></a></li>
+                                <li>
+                                    <a href="{{ url_for('index')}}" class="tooltipped" data-postion="bottom" data-delay="50" data-tooltip='refresh'>
+                                        <i class="material-icons">refresh</i></a>
+                                </li>
+                                <!--<a class="tooltipped" data-position="bottom" data-delay="50" data-tooltip="I am tooltip">Hover me!</a>-->
+
+                                <!--<li><a href="mobile.html"><i class="material-icons">more_vert</i></a></li>-->
+                                <li><a class="dropdown-button" href="#!" data-activates="dropdown1"><i class="material-icons right">more_vert</i></a></li>
+                            </ul>
+                        </div>
+                </nav>
+
+                <aside id="left-sidebar-nav">
+                    <ul class="side-nav fixed leftside-navigation" id="slide-out">
+                        <style>
+                            header,
+                            main,
+                            wrapper,
+                            footer {
+                                padding-left: 250px;
+                            }
+                            
+                            @media only screen and (max-width: 992px) {
+                                header,
+                                main,
+                                footer {
+                                    padding-left: 0;
+                                }
+                            }
+                        </style>
+                        <li>
+                            <div class="userView">
+                                <div class="background">
+                                    <img src="../static/bc.jpg">
+                                </div>
+                                <a href="#!user"><img class="circle" src="../static/avatar.png"></a>
+                                {% if current_user.is_authenticated%}
+                                <a href="#!name"><span class="white-text name">{{ current_user.username|capitalize }}</span></a>
+                                <a href="#!email"><span class="white-text email">{{ current_user.email | capitalize}}</span></a>                                {% else %}
+                                <a href="#!name">
+                                    <h3><span class="white-text name">Hi,Stranger!</h3></span></a>
+                                {% endif %}
+                            </div>
+                        </li>
+                        <li><a class="subheader">Get Started</a></li>
+                        <li><a href="#"><i class="material-icons left">dashboard</i>Dashboard</a></li>
+                        <li><a href="#"><i class="material-icons left">trending_up</i>Levels</a></li>
+                        <li><a href="#"><i class="material-icons left">account_circle</i>Profile</a></li>
+                        <li><a href="#"><i class="material-icons left">group</i>Communties</a></li>
+                        <li><a href="#"><i class="material-icons left">notifications</i>Notifications</a></li>
+
+                        <li>
+                            <div class="divider"></div>
+                        </li>
+                        <li><a class="waves-effect" href="#!"><i class="material-icons left">settings</i>Settings</a></li>
+                        <li><a class="waves-effect" href="#!"><i class="material-icons left">help</i>Help & Feedback</a></li>
+                        <li><a class="waves-effect" href="#!"><i class="material-icons left">swap_vert</i>Changelog</a></li>
+                    </ul>
+
+                    </div>
+                    <!--</nav>-->
+                </aside>
+
+                <div class="fixed-action-btn">
+                    <a class="btn-floating btn-large dark blue">
+                        <i class="large material-icons">add</i>
+                    </a>
+                    <ul>
+                        <li><a class="btn-floating red"><i class="material-icons">insert_chart</i></a></li>
+                        <li><a class="btn-floating yellow darken-1"><i class="material-icons">format_quote</i></a></li>
+                        <li><a class="btn-floating green"><i class="material-icons">publish</i></a></li>
+                        <li><a class="btn-floating blue"><i class="material-icons">attach_file</i></a></li>
+                    </ul>
+                </div>
+
+
+                <!--<a class="btn" onclick="Materialize.toast('I am a toast', 4000)">Toast!</a>-->
+
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.0/js/materialize.min.js"></script>
+                <script type="text/javascript" src="../static/main.js"></script>
+                <script type="text/javascript" src="../static/materialize.min.js"></script>
+
+                <script>
+                    // Toast Notification
+                    $(window).load(function () {
+                        setTimeout(function () {
+                            Materialize.toast(
+                                "<span>Woot! You're in {{ current_user.username|capitalize }}!</span>",
+                                3500);
+                        }, 1800);
+
+                    });
+                </script>
+    </body>
+
+</html>
