@@ -5,25 +5,26 @@ from forms import SigninForm, SignupForm
 from models import User
 
 
-app = Flask(__name__)
-
 @login_manager.user_loader
 def load_user(userid):
     return User.query.get(int(userid))
 
-
 @app.route('/')
-@login_required
+# @login_required
 def home():
     return 'hello world'
 
 @app.route('/dashboard')
-@login_required
+# @login_required
 def dashboard():
     return 'hello world'
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
+    '''
+    This handles logging in upon
+    successful user authentication
+    '''    
     form = SigninForm()
     if form.validate_on_submit():
         user = User.query.filter_by(username=form.username.data).first()
@@ -34,14 +35,11 @@ def login():
         # flash('Invalid username or password.')
     return render_template('signup_or_register.html', form=form)    
 
-@app.route("/logout")
-def logout():
-    logout_user()
-    return redirect(url_for('login'))   
-    
-
 @app.route('/signup', methods=['GET', 'POST'])
 def signup():
+    '''
+    Register a new user to the system
+    '''
     form = SignupForm()
     if form.validate_on_submit():
         user = User(email=form.email.data,
@@ -52,3 +50,11 @@ def signup():
         # flash("You have successfully registered! You may now login.")
         return redirect(url_for('login'))
     return render_template('signup_or_register.html' , form=form)   
+
+@app.route("/logout")
+def logout():
+    '''
+    ends a user session and log outs
+    '''
+    logout_user()
+    return redirect(url_for('login'))       
