@@ -35,15 +35,15 @@
         </div>
         <div class="row margin">
           <div class="input-field col s12">
-            <input type="text" class="validate" id="firstname" name="firstname">
-            <label for="firstname">firstname</label>
+            <input type="text" class="validate" id="username" name="username">
+            <label for="username">username</label>
           </div>
         </div>
-        <div class="row margin">
+        <!--<div class="row margin">
           <div class="input-field col s12"><input type="text" class="validate" id="lastname" name="lastname">
             <label for="lastname">Lastname</label>
           </div>
-        </div>
+        </div>-->
         <div class="row margin">
           <div class="input-field col s12">
             <input type="email" class="validate" id="email" name="email">
@@ -56,11 +56,11 @@
             <label for="password">Password</label>
           </div>
         </div>
-        <!--<div class="row margin">
+        <div class="row margin">
           <div class="input-field col s12">
           <input type="password" class="validate" id="password2" name="password2">
           <label for="password2">Confirm password</label>
-        </div>-->
+        </div>
         <div class="row">
           <div class="input-field col s12">
             <button class="btn pink waves-effect waves-light col s12" type="submit">Register now
@@ -82,7 +82,7 @@
     // Toast Notification
     $(window).load(function () {
       setTimeout(function () {
-        Materialize.toast("<span>Woot! You're in {{ current_user.firstname|capitalize }}!</span>",
+        Materialize.toast("<span>Welcome! signup to getstarted</span>",
           3500);
       }, 1800);
 

@@ -1,4 +1,5 @@
-from flask import Flask, render_template, url_for, redirect, url_for, flash
+
+from flask import Flask, render_template, url_for, request, redirect, url_for, flash, abort
 from flask_login import login_required, login_user, logout_user, current_user
 from app import app, db, login_manager
 from forms import SigninForm, SignupForm
@@ -16,6 +17,12 @@ def home():
     return render_template('base.html')
 
 
+@app.route('/index')
+@login_required
+def index():
+    return render_template('base.html')
+
+
 @app.route('/dashboard')
 @login_required
 def dashboard():
@@ -24,10 +31,6 @@ def dashboard():
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
-    '''
-    This handles logging in upon
-    successful user authentication
-    '''
     form = SigninForm()
     if form.validate_on_submit():
         user = User.query.filter_by(username=form.username.data).first()
@@ -39,11 +42,14 @@ def login():
     return render_template('login.html', form=form)
 
 
+@app.route("/logout")
+def logout():
+    logout_user()
+    return redirect(url_for('login'))
+
+
 @app.route('/signup', methods=['GET', 'POST'])
 def signup():
-    '''
-    Register a new user to the system
-    '''
     form = SignupForm()
     if form.validate_on_submit():
         user = User(email=form.email.data,
@@ -54,12 +60,3 @@ def signup():
         # flash("You have successfully registered! You may now login.")
         return redirect(url_for('login'))
     return render_template('signup.html', form=form)
-
-
-@app.route("/logout")
-def logout():
-    '''
-    ends a user session and log outs
-    '''
-    logout_user()
-    return redirect(url_for('login'))

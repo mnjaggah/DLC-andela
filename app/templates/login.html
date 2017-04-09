@@ -27,16 +27,16 @@
   <div id="login-page" class="row">
     <div class="col s12 z-depth-4 card-panel">
       <form class="login-form" method="post" role="form">
-         {{ form.hidden_tag() }}
+        {{ form.hidden_tag() }}
         <div class="row">
           <div class="input-field col s12 center">
-            <img src="../static/andela.png"width=50% height="=50%" alt="" class=" responsive-img valign profile-image-login">
+            <img src="../static/andela.png" width=50% height="=50%" alt="" class=" responsive-img valign profile-image-login">
             <p class="center login-form-text">Login to your Andela Dlc Account</p>
           </div>
         </div>
         <div class="row margin">
           <div class="input-field col s12">
-           <input type="text" class="validate" id="username" name="username">
+            <input type="text" class="validate" id="username" name="username">
             <label for="username">Username</label>
           </div>
         </div>
@@ -46,21 +46,28 @@
             <label for="password">Password</label>
           </div>
         </div>
-        <div class="row">          
+        <div class="row">
           <div class="input-field col s12 m12 l12  login-text">
-              <input type="checkbox" id="remember-me">
-              <label for="remember-me">Remember me</label>
+            <input type="checkbox" id="remember-me">
+            <label for="remember-me">Remember me</label>
           </div>
         </div>
         <div class="row">
           <div class="input-field col s12">
-           <button class="btn pink waves-effect waves-light col s12" type="submit">Log in
+            <button class="btn pink waves-effect waves-light col s12" type="submit">Log in
           </div>
         </div>
 
       </form>
     </div>
   </div>
+  <div class="row">
+    <div class="col s12">
+    <p class="margin medium-small">Dont have an account?<a href="{{url_for('signup')}}"> Register Now!</a></p>
+    </div>
+  </div>
+  
+
   </div>
   <!--<a class="btn" onclick="Materialize.toast('I am a toast', 4000)">Toast!</a>-->
 
@@ -72,7 +79,7 @@
     // Toast Notification
     $(window).load(function () {
       setTimeout(function () {
-        Materialize.toast("<span>Woot! You're in {{ current_user.username|capitalize }}!</span>",
+        Materialize.toast("<span>Please Login to access!</span>",
           3500);
       }, 1800);
 

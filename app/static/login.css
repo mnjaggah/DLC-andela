@@ -1,0 +1,61 @@
+body {
+    background-color:#EBEFF1;
+    
+}
+html,
+body {
+    height: 100%;
+}
+html {
+    display: table;
+    margin: auto;
+}
+body {
+    display: table-cell;
+    vertical-align: middle;
+}
+nav {
+    color: #fff;
+    background-color: #3359DF!important;
+    width: 100%;
+    height: 56px;
+    line-height: 56px;
+}
+.preloader-background {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background-color: #eee;
+	
+	position: absolute;
+	z-index: 100;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;	
+}
+.login-form {
+    width: 280px
+}
+.z-depth-4,
+.modal {
+    box-shadow: 0 16px 28px 0 rgba(0, 0, 0, 0.22), 0 25px 55px 0 rgba(0, 0, 0, 0.21)
+}
+.login-form {
+    width: 280px
+}
+
+/*.login-form-text {
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-size: 0.8rem
+}*/
+.btn, .btn-large {
+    text-decoration: none;
+    color: #fff;
+    background-color: #E91E63 !important;
+}
+.login-alert{
+    color: #fff !important;
+
+}

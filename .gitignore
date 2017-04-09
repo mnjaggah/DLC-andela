@@ -1,0 +1,7 @@
+venv
+*.pyc
+*.__pycache__
+*.cache
+*.db
+materialize.min.css
+materialize.min.js
