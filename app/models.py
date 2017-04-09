@@ -6,6 +6,11 @@ from app import db
 from app import login_manager
 
 
+@login_manager.user_loader
+def load_user(userid):
+    return User.query.get(int(userid))
+
+
 class User(db.Model):
     """The class User will be used to create a table that
     will store the information regarding the users"""
@@ -17,11 +22,11 @@ class User(db.Model):
     password_hash = Column(db.String)
     role = Column(String(10))
 
-    def __init__(self, email, firstname,lastname, password):
+    def __init__(self, email, firstname, lastname, password):
         self.email = email
         self.firstname = firstname
-        self.lastname =lastname
-        self.password_hash= generate_password_hash(password)
+        self.lastname = lastname
+        self.password_hash = generate_password_hash(password)
         self.role = "Learner"
 
     def check_password(self, password):
@@ -33,12 +38,11 @@ class User(db.Model):
         """A method that allows an admin to make a user
         as to be  afacilitator"""
         self.role = "Facilitator"
-    
+
     def make_admin(self):
         """A method that allows an admin to allocate
         admin roles to a user"""
         self.role = "Admin"
-
 
     @property
     def password(self):
@@ -46,7 +50,4 @@ class User(db.Model):
 
     @password.setter
     def password(self, password):
-        self.password_hash = generate_password_hash(password) 
-
-
-
+        self.password_hash = generate_password_hash(password)
