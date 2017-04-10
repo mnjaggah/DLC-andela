@@ -9,12 +9,12 @@ def initdb():
     db.create_all()
     db.session.add(User(username='admin', email='admin@andela.com',password='andela'))
     db.session.commit()
-    print 'Intialized'
+    print ('Intialized')
 
 @manager.command
 def dropdb():
     db.drop_all()
-    print 'Done'
+    print ('Done')
 
 if __name__ == '__main__':
     manager.run()
