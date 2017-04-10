@@ -63,7 +63,7 @@
                             footer {
                                 padding-left: 250px;
                             }
-                            
+
                             @media only screen and (max-width: 992px) {
                                 header,
                                 main,
@@ -89,7 +89,7 @@
                         <li><a class="subheader">Get Started</a></li>
                         <li><a href="{{url_for('dashboard')}}"><i class="material-icons left">dashboard</i>Dashboard</a></li>
                         <li><a href="#"><i class="material-icons left">trending_up</i>Levels</a></li>
-                        <li><a href="#"><i class="material-icons left">account_circle</i>Courses</a></li>
+                        <li><a href="{{url_for('list_courses')}}"><i class="material-icons left">account_circle</i>Courses</a></li>
                         <li><a href="#"><i class="material-icons left">group</i>Communties</a></li>
                         <li><a href="#"><i class="material-icons left">notifications</i>Notifications</a></li>
 
@@ -123,7 +123,7 @@
                 <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.0/js/materialize.min.js"></script>
                 <script type="text/javascript" src="../static/main.js"></script>
                 <script type="text/javascript" src="../static/materialize.min.js"></script>
-                
+
                 <script>
                     // Toast Notification
                     $(window).load(function () {
