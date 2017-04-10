@@ -5,11 +5,6 @@ from app import db
 from app import login_manager
 
 
-@login_manager.user_loader
-def load_user(userid):
-    return User.query.get(int(userid))
-
-
 class User(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(80), unique=True)
@@ -17,6 +12,7 @@ class User(db.Model, UserMixin):
     password_hash = db.Column(db.String)
     is_admin = db.Column(db.Boolean, default=False)
     is_learner = db.Column(db.Boolean, default=True)
+    
 
     @property
     def password(self):
@@ -35,3 +31,15 @@ class User(db.Model, UserMixin):
 
     def __repr__(self):
         return "<User '{}'>".format(self.username)
+
+
+@login_manager.user_loader
+def load_user(userid):
+    return User.query.get(int(userid))
+
+class Facilitator(db.Model):
+    __tablename__ = 'facilitators'
+    id = db.Column(db.Integer, primary_key=True)
+    first_name = db.Column(db.String(64), unique=False)
+    last_name = db.Column(db.String(64), unique=False)
+    email = db.Column(db.String(120), unique=True)
