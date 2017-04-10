@@ -2,8 +2,8 @@
 from flask import Flask, render_template, url_for, request, redirect, url_for, flash, abort
 from flask_login import login_required, login_user, logout_user, current_user
 from app import app, db, login_manager
-from forms import SigninForm, SignupForm
-from models import User
+from .forms import SigninForm, SignupForm, CoursesForm
+from .models import User, Items
 
 
 @login_manager.user_loader
@@ -33,7 +33,8 @@ def dashboard():
 def login():
     form = SigninForm()
     if form.validate_on_submit():
-        user = User.query.filter_by(username=form.username.data).first()
+        user = User.query.filter_by(
+            username=form.username.data).first()
         if user is not None and user.check_password(form.password.data):
             login_user(user)
             # flash('Logged in successfully')
@@ -60,3 +61,61 @@ def signup():
         # flash("You have successfully registered! You may now login.")
         return redirect(url_for('login'))
     return render_template('signup.html', form=form)
+
+
+@app.route("/courses", methods=['GET', 'POST'])
+def list_courses():
+    """ List all courses """
+    courses = Items.query.all()
+    if not courses:
+        flash("No available course")
+    return render_template('courses.html', courses=courses)
+
+
+@app.route("/courses/add", methods=['GET', 'POST'])
+def add_course():
+    """ Add course """
+    add_course = True
+    form = CoursesForm()
+    if form.validate_on_submit():
+        course = Items(name=form.name.data,
+                       description=form.description.data)
+        try:
+            db.session.add(course)
+            db.session.commit()
+            flash('You have successfully added a new course.')
+        except:
+            # in case course name already exists
+            flash('Error: department name already exists.')
+        # redirect to courses page
+        return redirect(url_for('list_courses'))
+    return render_template('addcourse.html', form=form)
+
+
+@app.route('/courses/edit/<int:id>', methods=['GET', 'POST'])
+def edit_course(id):
+    """ Edit a course """
+    add_course = False
+    course = Items.query.get_or_404(id)
+    form = CoursesForm(obj=course)
+    if form.validate_on_submit():
+        course.name = form.name.data
+        course.description = form.description.data
+        db.session.commit()
+        flash('You have successfully edited the course.')
+        return redirect(url_for('list_courses'))
+
+    form.description.data = course.description
+    form.name.data = course.name
+    return render_template('addcourse.html', add_course=add_course, form=form)
+
+
+@app.route('/course/delete/<int:id>', methods=['GET', 'POST'])
+def delete_course(id):
+    """ Delete a course from the database """
+    course = Items.query.get_or_404(id)
+    db.session.delete(course)
+    db.session.commit()
+    flash('You have successfully deleted the course.')
+    # redirect to the courses page
+    return redirect(url_for('list_courses'))
