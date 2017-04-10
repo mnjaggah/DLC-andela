@@ -2,8 +2,8 @@
 from flask import Flask, render_template, url_for, request, redirect, url_for, flash, abort
 from flask_login import login_required, login_user, logout_user, current_user
 from app import app, db, login_manager
-from forms import SigninForm, SignupForm
-from models import User
+from .forms import SigninForm, SignupForm
+from .models import User
 
 
 @login_manager.user_loader
