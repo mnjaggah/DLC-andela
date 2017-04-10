@@ -29,7 +29,7 @@
         {{ form.hidden_tag() }}
         <div class="row">
           <div class="input-field col s12 center">
-            <img src="../static/andela.png"width=50% height="=50%" alt="" class=" responsive-img valign profile-image-login">
+            <img src="../static/andela.png" width=50% height="=50%" alt="" class=" responsive-img valign profile-image-login">
             <p class="center">Join to our community now !</p>
           </div>
         </div>
@@ -58,12 +58,12 @@
         </div>
         <div class="row margin">
           <div class="input-field col s12">
-          <input type="password" class="validate" id="password2" name="password2">
-          <label for="password2">Confirm password</label>
-        </div>
-        <div class="row">
-          <div class="input-field col s12">
-            <button class="btn pink waves-effect waves-light col s12" type="submit">Register now
+            <input type="password" class="validate" id="password2" name="password2">
+            <label for="password2">Confirm password</label>
+          </div>
+          <div class="row">
+            <div class="input-field col s12">
+              <button class="btn pink waves-effect waves-light col s12" type="submit">Register now
           </div>
           <div class="input-field col s12">
             <p class="margin center medium-small sign-up">Already have an account? <a href="{{url_for("login")}}">Login</a></p>
@@ -72,6 +72,23 @@
       </form>
     </div>
   </div>
+                   <div class="row">
+                   <!--alert,error flash messages-->
+                <article class="col s12 m12 l6 offset-l3 flash">
+                    {% with messages = get_flashed_messages() %}
+                    {% if messages %}
+                    <ul>
+                       {% for message in messages %}
+                        <li class="center-align"> {{ message}}</li>
+                  <!--<a  class='btn' onhover=Materialize.toast('{{ message}}!', 4000) </a>-->
+        
+                        {% endfor %}
+                    </ul> 
+                    {% endif %}  
+                    {% endwith %}
+                </article>
+                
+                 </div>
   <!--<a class="btn" onclick="Materialize.toast('I am a toast', 4000)">Toast!</a>-->
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.0/js/materialize.min.js"></script>

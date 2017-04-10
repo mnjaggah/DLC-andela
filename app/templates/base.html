@@ -89,7 +89,7 @@
                         <li><a class="subheader">Get Started</a></li>
                         <li><a href="{{url_for('dashboard')}}"><i class="material-icons left">dashboard</i>Dashboard</a></li>
                         <li><a href="#"><i class="material-icons left">trending_up</i>Levels</a></li>
-                        <li><a href="#"><i class="material-icons left">account_circle</i>Courses</a></li>
+                        <li><a href="{{url_for('user')}}"><i class="material-icons left">account_circle</i>Profile</a></li>
                         <li><a href="#"><i class="material-icons left">group</i>Communties</a></li>
                         <li><a href="#"><i class="material-icons left">notifications</i>Notifications</a></li>
 
@@ -116,6 +116,26 @@
                         <li><a class="btn-floating blue"><i class="material-icons">attach_file</i></a></li>
                     </ul>
                 </div>
+                <div class="main-container">
+            <div class="main wrapper clearfix">
+
+                 <div class="row">
+                   <!--alert,error flash messages-->
+                <article class="col s12 m12 l6 offset-l3 flash">
+                    {% with messages = get_flashed_messages() %}
+                    {% if messages %}
+                    <ul>
+                       {% for message in messages %}
+                        <li class="center-align"> {{ message}}</li>
+                  <!--<a  class='btn' onhover=Materialize.toast('{{ message}}!', 4000) </a>-->
+        
+                        {% endfor %}
+                    </ul> 
+                    {% endif %}  
+                    {% endwith %}
+                </article>
+                
+                 </div>
 
 
                 <!--<a class="btn" onclick="Materialize.toast('I am a toast', 4000)">Toast!</a>-->

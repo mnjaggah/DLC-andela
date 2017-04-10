@@ -69,6 +69,23 @@
   
 
   </div>
+                   <div class="row">
+                   <!--alert,error flash messages-->
+                <article class="col s12 m12 l6 offset-l3 flash">
+                    {% with messages = get_flashed_messages() %}
+                    {% if messages %}
+                    <ul>
+                       {% for message in messages %}
+                        <li class="center-align"> {{ message}}</li>
+                  <!--<a  class='btn' onhover=Materialize.toast('{{ message}}!', 4000) </a>-->
+        
+                        {% endfor %}
+                    </ul> 
+                    {% endif %}  
+                    {% endwith %}
+                </article>
+                
+                 </div>
   <!--<a class="btn" onclick="Materialize.toast('I am a toast', 4000)">Toast!</a>-->
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.0/js/materialize.min.js"></script>

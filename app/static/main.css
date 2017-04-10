@@ -24,3 +24,25 @@ nav {
     right: 0;
     bottom: 0;
 }
+.flash ul {
+    margin-top: 20px;
+    background: #92b06a;
+    color: #fff;
+    list-style: none;
+    list-style-type: none;
+}
+
+.flash ul {
+    margin-top: 20px;
+    background: #92b06a;
+    color: #fff;
+     padding: 8px;
+    margin-bottom: 8px;
+    border: 1px solid transparent;
+    border-radius: 4px;
+}
+
+.flash {
+    margin-bottom: 1em;
+}
+

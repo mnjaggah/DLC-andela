@@ -1,9 +1,9 @@
 
-from flask import Flask, render_template, url_for, request, redirect, url_for, flash, abort
+from flask import Flask, render_template, url_for, request, redirect, url_for, flash, abort,request
 from flask_login import login_required, login_user, logout_user, current_user
 from app import app, db, login_manager
-from forms import SigninForm, SignupForm
-from models import User
+from .forms import SigninForm, SignupForm
+from .models import User
 
 
 @login_manager.user_loader
@@ -36,9 +36,9 @@ def login():
         user = User.query.filter_by(username=form.username.data).first()
         if user is not None and user.check_password(form.password.data):
             login_user(user)
-            # flash('Logged in successfully')
+            flash('Logged in successfully')
             return redirect(request.args.get('next') or url_for('dashboard'))
-        # flash('Invalid username or password.')
+        flash('Invalid username or password.')
     return render_template('login.html', form=form)
 
 
@@ -57,6 +57,11 @@ def signup():
                     password=form.password.data)
         db.session.add(user)
         db.session.commit()
-        # flash("You have successfully registered! You may now login.")
+        flash("You have successfully registered! You may now login.")
         return redirect(url_for('login'))
     return render_template('signup.html', form=form)
+
+@app.route('/user/<username>')
+def user(username):
+    user = User.query.filter_by(username=username).first_or_404()
+    return render_template('user_profile.html', user=user)
