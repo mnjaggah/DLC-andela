@@ -35,3 +35,19 @@ class SignupForm(Form):
     def validate_username(self, username_field):
         if User.query.filter_by(username=username_field.data).first():
             raise ValidationError('Username already in use.') 
+
+
+
+
+class AddFacilitator(Form):
+    """Form to add facilitators to system"""
+
+    first_name = StringField('First Name', validators=[DataRequired()])
+    last_name = StringField('Last Name', validators=[DataRequired()])
+    email = StringField('Email', validators=[DataRequired(), Email()])
+    submit = SubmitField('Save')
+    
+
+
+
+
