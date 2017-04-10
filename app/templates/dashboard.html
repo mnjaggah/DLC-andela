@@ -3,7 +3,7 @@
 My Dashboard | Welcome
 {% endblock %}
 {% block content %}
-
+{% if current_user.is_admin %}
 <div id="table-datatables">
               <h4 class="header">Andela DLC Learners</h4>
               <div class="row">
@@ -14,7 +14,7 @@ My Dashboard | Welcome
                             <th>Name</th>
                             <th>Level</th>
                             <th>Progress</th>
-                            <th>Test</th>
+                            <th>Task</th>
                             <th>Language</th>
                             <th>Facilitator </th>
                             <th>Date started </th>
@@ -46,7 +46,7 @@ My Dashboard | Welcome
                             <td>20%</td>
                             <td>Online Shop</td>
                             <td>Flask</td>
-                            <td>Jimmy</td>
+                            <td>Saya</td>
                             <td>2017/05/22</td>
                         </tr>
                         <tr>
@@ -55,7 +55,21 @@ My Dashboard | Welcome
                             <td>20%</td>
                             <td>Kanban</td>
                             <td>CLI Python</td>
-                            <td>Jimmy</td>
+                            <td>Angela</td>
                             <td>2017/05/25</td>
                         </tr>
-                        {% endblock %}  
+                        <tr>
+                            <td>John Doe</td>
+                            <td>Beginner</td>
+                            <td>20%</td>
+                            <td>Kanban</td>
+                            <td>CLI Python</td>
+                            <td>Assign</td>
+                            <td>2017/05/25</td>
+                        </tr>                        
+                        {% else %}
+                        {{url_for('index')}}
+                        {% endif %}
+                        
+              {% endblock %} 
+                         
