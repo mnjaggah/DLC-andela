@@ -1,44 +1,37 @@
-
-from sqlalchemy import Column, String, create_engine
-from sqlalchemy.ext.declarative import declarative_base
+from datetime import datetime
+from flask_login import UserMixin, AnonymousUserMixin
 from werkzeug.security import generate_password_hash, check_password_hash
+from app import db
+from app import login_manager
 
-Base = declarative_base()
-engine = create_engine("sqlite:///Andela-DLC.db")
-Base.metadata.bind = engine
 
-class User(Base):
-    """The class User will be used to create a table that
-    will store the information regarding the users"""
-    __tablename__ = "users"
-    email = Column(String(50), primary_key=True, autoincrement=False)
-    firstname = Column(String(20))
-    surname = Column(String(20))
-    pwdhash = Column(String(20))
-    role = Column(String(10))
+@login_manager.user_loader
+def load_user(userid):
+    return User.query.get(int(userid))
 
-    def __init__(self, email, firstname, surname, password):
-        self.email = email
-        self.firstname = firstname
-        self.surname = surname
-        self.pwdhash = generate_password_hash(password)
-        self.role = "Learner"
+
+class User(db.Model, UserMixin):
+    id = db.Column(db.Integer, primary_key=True)
+    username = db.Column(db.String(80), unique=True)
+    email = db.Column(db.String(120), unique=True)
+    password_hash = db.Column(db.String)
+    is_admin = db.Column(db.Boolean, default=False)
+    is_learner = db.Column(db.Boolean, default=True)
+
+    @property
+    def password(self):
+        raise AttributeError('password is not a readable attribute')
+
+    @password.setter
+    def password(self, password):
+        self.password_hash = generate_password_hash(password)
 
     def check_password(self, password):
-        """A method to be used to check if the password
-        supplied matches with the encrypted password in the db"""
-        return check_password_hash(self.pwdhash, password)
+        return check_password_hash(self.password_hash, password)
 
-    def make_facilitator(self):
-        """A method that allows an admin to make a user
-        as to be  afacilitator"""
-        self.role = "Facilitator"
-    
-    def make_admin(self):
-        """A method that allows an admin to allocate
-        admin roles to a user"""
-        self.role = "Admin"
+    @staticmethod
+    def get_by_username(username):
+        return User.query.filter_by(username=username).first()
 
-Base.metadata.create_all(engine)
-
-
+    def __repr__(self):
+        return "<User '{}'>".format(self.username)

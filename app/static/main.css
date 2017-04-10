@@ -1,0 +1,26 @@
+ body {
+
+    width: 100%;
+    background-color:  #fff;
+}
+
+nav {
+    color: #fff;
+    background-color: #3359DF!important;
+    width: 100%;
+    height: 56px;
+    line-height: 56px;
+}
+
+.preloader-background {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #eee;
+    position: absolute;
+    z-index: 100;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}

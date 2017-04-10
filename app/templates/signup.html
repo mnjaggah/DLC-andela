@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <!--Import Google Icon Font-->
+  <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+  <!-- Compiled and minified CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.1/css/materialize.min.css">
+  <!-- Compiled and minified JavaScript -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.1/js/materialize.min.js"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+  <link rel="stylesheet" href="../static/login.css" />
+  <link rel="stylesheet" href="../static/materialize.min.css" />
+  <!--<link type="text/css" rel="stylesheet" href="css/main.css"/>-->
+  <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+  <script type="text/javascript" src="../static/main.js"></script>
+  <!--<script type="text/javascript" src="../static/js/materialize.min.js"><-->
+
+  <!-- to Let browser know website is optimized for mobile-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+</head>
+
+
+<body class="indigo">
+  <div id="login-page" class="row">
+    <div class="col l12 z-depth-4 card-panel">
+      <form class="login-form" action="{{ url_for('signup') }}" method="post" role="form">
+        {{ form.hidden_tag() }}
+        <div class="row">
+          <div class="input-field col s12 center">
+            <img src="../static/andela.png"width=50% height="=50%" alt="" class=" responsive-img valign profile-image-login">
+            <p class="center">Join to our community now !</p>
+          </div>
+        </div>
+        <div class="row margin">
+          <div class="input-field col s12">
+            <input type="text" class="validate" id="username" name="username">
+            <label for="username">username</label>
+          </div>
+        </div>
+        <!--<div class="row margin">
+          <div class="input-field col s12"><input type="text" class="validate" id="lastname" name="lastname">
+            <label for="lastname">Lastname</label>
+          </div>
+        </div>-->
+        <div class="row margin">
+          <div class="input-field col s12">
+            <input type="email" class="validate" id="email" name="email">
+            <label for="email">Email</label>
+          </div>
+        </div>
+        <div class="row margin">
+          <div class="input-field col s12">
+            <input type="password" class="validate" id="password" name="password">
+            <label for="password">Password</label>
+          </div>
+        </div>
+        <div class="row margin">
+          <div class="input-field col s12">
+          <input type="password" class="validate" id="password2" name="password2">
+          <label for="password2">Confirm password</label>
+        </div>
+        <div class="row">
+          <div class="input-field col s12">
+            <button class="btn pink waves-effect waves-light col s12" type="submit">Register now
+          </div>
+          <div class="input-field col s12">
+            <p class="margin center medium-small sign-up">Already have an account? <a href="{{url_for("login")}}">Login</a></p>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+  <!--<a class="btn" onclick="Materialize.toast('I am a toast', 4000)">Toast!</a>-->
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.0/js/materialize.min.js"></script>
+  <script type="text/javascript" src="../static/main.js"></script>
+  <script type="text/javascript" src="../static/materialize.min.js"></script>
+
+  <script>
+    // Toast Notification
+    $(window).load(function () {
+      setTimeout(function () {
+        Materialize.toast("<span>Welcome! signup to getstarted</span>",
+          3500);
+      }, 1800);
+
+    });
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,75 @@
+{% extends "base.html" %}
+{% block title %}
+My Dashboard | Welcome
+{% endblock %}
+{% block content %}
+{% if current_user.is_admin %}
+<div id="table-datatables">
+              <h4 class="header">Andela DLC Learners</h4>
+              <div class="row">
+                <div class="col s11">
+                  <table id="data-table-simple" class="responsive-table display" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Level</th>
+                            <th>Progress</th>
+                            <th>Task</th>
+                            <th>Language</th>
+                            <th>Facilitator </th>
+                            <th>Date started </th>
+                        </tr>
+                    </thead>
+                 
+                    <tbody>
+                        <tr>
+                            <td>Jimmy Kimani</td>
+                            <td>Professional </td>
+                            <td>80%</td>
+                            <td>Amity</td>
+                            <td>CLI Python</td>
+                            <td>Musomi</td>
+                            <td>2017/04/05</td>
+                        </tr>
+                        <tr>
+                            <td>Oscar Maina</td>
+                            <td>Professional</td>
+                            <td>75%</td>
+                            <td>Issue Tracker</td>
+                            <td>Flask</td>
+                            <td>Ian</td>
+                            <td>2017/04/15</td>
+                        </tr>
+                        <tr>
+                            <td>Achesa M</td>
+                            <td>Professional</td>
+                            <td>20%</td>
+                            <td>Online Shop</td>
+                            <td>Flask</td>
+                            <td>Saya</td>
+                            <td>2017/05/22</td>
+                        </tr>
+                        <tr>
+                            <td>Maria M</td>
+                            <td>Beginner</td>
+                            <td>20%</td>
+                            <td>Kanban</td>
+                            <td>CLI Python</td>
+                            <td>Angela</td>
+                            <td>2017/05/25</td>
+                        </tr>
+                        <tr>
+                            <td>John Doe</td>
+                            <td>Beginner</td>
+                            <td>20%</td>
+                            <td>Kanban</td>
+                            <td>CLI Python</td>
+                            <td>Assign</td>
+                            <td>2017/05/25</td>
+                        </tr>                        
+                        {% else %}
+                        {{url_for('index')}}
+                        {% endif %}
+                        
+              {% endblock %} 
+                         
