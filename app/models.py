@@ -35,3 +35,32 @@ class User(db.Model, UserMixin):
 
     def __repr__(self):
         return "<User '{}'>".format(self.username)
+
+
+class Learner(User):
+    facilitator = db.Column(db.String(80))
+    course_id = db.Column(db.Integer, db.ForeignKey('course.id'))
+    previous_courses = db.Column(db.PickleType)
+
+
+class Course(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String, unique=True)
+    description = db.Column(db.Text)
+    learners = db.relationship('Learner', lazy='dynamic')
+    tasks = db.relationship('Task', backref='course', lazy='dynamic')
+
+
+class Task(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String)
+    description = db.Column(db.Text)
+    course_id = db.Column(db.Integer, db.ForeignKey('course.id'))
+    targets = db.relationship('Target', backref='task', lazy='dynamic')
+
+
+class Target(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String)
+    is_done = db.Column(db.Boolean)
+    task_id = db.Column(db.String, db.ForeignKey('task.id'))
