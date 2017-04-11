@@ -19,7 +19,8 @@ class TestBase(TestCase):
     def create_app():
         app = Flask(__name__)
         db.init_app(app)
-        db.create_all()
+        with app.app_context():
+            db.create_all()
         return app
 
     def setUp(self):

@@ -44,10 +44,13 @@ class CoursesForm(FlaskForm):
     name = StringField('Course Name', validators=[DataRequired()])
     description = TextField(
         'Description', validators=[DataRequired()])
+    url = URLField('URL', validators=[DataRequired()])
     submit = SubmitField('Create')
 
 
-class ResourcesForm(FlaskForm):
-    """ Form for admin to add resources link """
-    url = URLField('URL', validators=[DataRequired()])
-    submit = SubmitField('Add')
+class TasksForm(FlaskForm):
+    """ Form for admin to add course tasks"""
+    TaskName = StringField('TaskName', validators=[DataRequired()])
+    description = TextField(
+        'Description', validators=[DataRequired()])
+    submit = SubmitField('Add task')
