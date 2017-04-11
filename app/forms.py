@@ -1,4 +1,4 @@
-from flask_wtf import Form
+from flask_wtf import FlaskForm as Form
 from wtforms.fields import StringField, PasswordField, BooleanField, SubmitField
 from wtforms.validators import DataRequired, url, Length, Email, Regexp, EqualTo
 from wtforms import ValidationError
@@ -34,4 +34,8 @@ class SignupForm(Form):
 
     def validate_username(self, username_field):
         if User.query.filter_by(username=username_field.data).first():
-            raise ValidationError('Username already in use.') 
+            raise ValidationError('Username already in use.')
+
+class TrackingBoardForm(Form):
+    title = StringField('Title', validators=[DataRequired()])
+    submit = SubmitField('Create Board')
