@@ -2,7 +2,7 @@
 from flask import Flask, render_template, url_for, request, redirect, url_for, flash, abort
 from flask_login import login_required, login_user, logout_user, current_user
 from app import app, db, login_manager
-from .forms import SigninForm, SignupForm, AddFacilitator
+from .forms import SigninForm, SignupForm, FacilitatorsForm
 from .models import User, Facilitator
 
 
@@ -71,24 +71,6 @@ def signup():
 
 
 
-@app.route('/facilitators', methods=['GET','POST'])
-@login_required
-def view_facilitators():
-    """
-    Function to view all facilitators
-    """
-    check_admin()
-
-    all_facilitators = Facilitator.query.all()
-    return render_template(
-        'admin/facilitators/all_facilitators.html',
-        all_facilitators=all_facilitators,
-        title="Facilitators"
-        )
-
-
-
-
 @app.route('/facilitators/add', methods=['GET','POST'])
 @login_required
 def add_facilitator():
@@ -96,9 +78,9 @@ def add_facilitator():
     Functionality to add facilitators to the system
     """
     check_admin()
-    new_facilitator = True
+    
 
-    form = AddFacilitator(Form)
+    form = FacilitatorsForm()
     if form.validate_on_submit():
         facilitator = Facilitator(
             first_name=form.first_name.data,
@@ -113,11 +95,23 @@ def add_facilitator():
 
         return redirect(url_for('view_facilitators'))
     return render_template(
-        'admin/facilitators/add_facilitator.html',
-        action='Add',
-        new_facilitators=new_facilitator,
-        title="Add Facilitator"
+        'add_facilitator.html',form=form)
+
+
+@app.route('/facilitators', methods=['GET','POST'])
+@login_required
+def view_facilitators():
+    """
+    Function to view all facilitators
+    """
+    check_admin()
+
+    all_facilitators = Facilitator.query.all()
+    return render_template('all_facilitators.html',
+        all_facilitators=all_facilitators,
+        title="Facilitators"
         )
+
 
 
 @app.route('/facilitators/dashboard', methods=['GET','POST'])
@@ -128,4 +122,4 @@ def view_allocated_learners():
 
     all_learners = User.query.filter_by(is_learner=True).first()
 
-    return render_template('/facilitators_dashboard.html', learners=all_learners)
+    return render_template('/facilitators_dashboard.html', all_learners=all_learners)

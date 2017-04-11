@@ -39,7 +39,7 @@ class SignupForm(Form):
 
 
 
-class AddFacilitator(Form):
+class FacilitatorsForm(Form):
     """Form to add facilitators to system"""
 
     first_name = StringField('First Name', validators=[DataRequired()])
