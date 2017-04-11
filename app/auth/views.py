@@ -13,8 +13,12 @@ def login():
         user = User.query.filter_by(username=form.username.data).first()
         if user is not None and user.check_password(form.password.data):
             login_user(user)
+            if user.is_admin:
+                return redirect(url_for('main.admin_dashboard'))
+            else:
+                return redirect(url_for('main.dashboard'))
             flash('Logged in successfully')
-            return redirect(request.args.get('next') or url_for('main.dashboard'))
+            return redirect(request.args.get('next') or url_for('main.admin_'))
         flash('Invalid username or password.')
     return render_template('login.html', form=form)
 
@@ -22,7 +26,7 @@ def login():
 @auth.route("/logout")
 def logout():
     logout_user()
-    return redirect(url_for('login'))
+    return redirect(url_for('auth.login'))
 
 
 @auth.route('/signup', methods=['GET', 'POST'])
@@ -35,5 +39,5 @@ def signup():
         db.session.add(user)
         db.session.commit()
         flash("You have successfully registered! You may now login.")
-        return redirect(url_for('login'))
+        return redirect(url_for('auth.login'))
     return render_template('signup.html', form=form)

@@ -7,7 +7,7 @@ manager = Manager(app)
 @manager.command
 def initdb():
     db.create_all()
-    db.session.add(User(username='admin', email='admin@andela.com',password='andela', is_admin=True))
+    db.session.add(User(username='admin', email='admin@andela.com',password='andela', is_admin=True, is_learner=False))
     db.session.commit()
     print ('Intialized')
 
