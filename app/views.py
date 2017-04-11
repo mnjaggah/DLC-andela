@@ -61,10 +61,10 @@ def signup():
         return redirect(url_for('login'))
     return render_template('signup.html', form=form)
 
-@app.route('/user/<username>')
-def user(username):
-    user = User.query.filter_by(username=username).first_or_404()
-    return render_template('user_profile.html', user=user)
+@app.route('/user')
+def user():
+    # user = User.query.filter_by(username=username).first_or_404()
+    return render_template('user_profile.html')
 
 @app.errorhandler(404)
 def page_not_found(e):
