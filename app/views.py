@@ -2,8 +2,9 @@
 from flask import Flask, render_template, url_for, request, redirect, url_for, flash, abort
 from flask_login import login_required, login_user, logout_user, current_user
 from app import app, db, login_manager
-from .forms import SigninForm, SignupForm
+from .forms import SigninForm, SignupForm, TrackingBoardForm
 from .models import User
+from .track import Challenge, Skill, Board
 
 
 @login_manager.user_loader
@@ -60,3 +61,14 @@ def signup():
         # flash("You have successfully registered! You may now login.")
         return redirect(url_for('login'))
     return render_template('signup.html', form=form)
+
+@app.route('/make_tracking_board', methods=('GET', 'POST'))
+@login_required
+def make_tracking_board():
+    form = TrackingBoardForm()
+    if form.validate_on_submit():
+        board = Board(form.board_name.data)
+        db.session.add(board)
+        db.session.commit()
+        return redirect(url_for('list_forum_questions'))
+    return render_template('tracking-board.html', form=form)
