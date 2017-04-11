@@ -26,7 +26,7 @@ def index():
 @app.route('/dashboard')
 @login_required
 def dashboard():
-    return render_template('dashboard.html')
+    return render_template('learner_dashboard.html')
 
 
 @app.route('/login', methods=['GET', 'POST'])
@@ -69,8 +69,8 @@ def user():
 def user_checkpoints():
     return render_template('my_checkpoint.html')
 
-@app.route('/user/my_checkpoints/tasks')    
-def user_user_tasks():
+@app.route('/user/tasks')    
+def user_tasks():
     return render_template('user_tasks.html')  
 
 @app.errorhandler(404)
