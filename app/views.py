@@ -2,7 +2,7 @@
 from flask import Flask, render_template, url_for, request, redirect, url_for, flash, abort
 from flask_login import login_required, login_user, logout_user, current_user
 from app import app, db, login_manager
-from .forms import SigninForm, SignupForm, CoursesForm, ResourcesForm
+from .forms import SigninForm, SignupForm, CoursesForm, TasksForm
 from .models import User, Course, Tasks
 
 
@@ -129,9 +129,9 @@ def delete_course(id):
 @login_required
 def add_tasks():
     """ Add task """
-    form = CoursesForm()
+    form = TasksForm()
     if form.validate_on_submit():
-        task = Tasks(task_name=form.name.data,
+        task = Tasks(task_name=form.TaskName.data,
                      task_description=form.description.data)
         try:
             db.session.add(task)
@@ -141,18 +141,5 @@ def add_tasks():
             # in case course name already exists
             flash('Error: task name already exists.')
         # redirect to courses page
-        return redirect(url_for('list_courses'))
-    return render_template('addcourse.html', form=form)
-
-
-@app.route('/add/resources', methods=['GET', 'POST'])
-@login_required
-def add_resource():
-    form = ResourcesForm()
-    if form.validate_on_submit():
-        resource = Course(resource=form.resource.data)
-        db.session.add(resource)
-        db.session.commit()
-        flash('You have successfully added a new resource.')
         return redirect(url_for('list_courses'))
     return render_template('addcourse.html', form=form)
