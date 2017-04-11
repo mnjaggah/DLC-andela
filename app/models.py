@@ -38,9 +38,21 @@ class User(db.Model, UserMixin):
         return "<User '{}'>".format(self.username)
 
 
-class Items(db.Model):
+class Course(db.Model):
     __tablename__ = 'courses'
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(200), unique=False)
+    name = db.Column(db.String(200), unique=True)
     description = db.Column(db.String(200), unique=False)
+    resource = db.Column(db.String(200), unique=False)
     #user_requests = db.relationship('User', foreign_keys=[user_id], backref='user')
+
+
+class Tasks(db.Model):
+    __tablename__ = 'tasks'
+    id = db.Column(db.Integer, primary_key=True)
+    task_name = db.Column(db.String(200), unique=True)
+    task_description = db.Column(db.String(200), unique=False)
+    course_id = db.Column(db.Integer, db.ForeignKey('courses.id'))
+
+    courses = db.relationship(
+        'Course', backref=db.backref('courses', lazy='dynamic'))
