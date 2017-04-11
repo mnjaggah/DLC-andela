@@ -54,4 +54,5 @@ class PostAnswerForm(Form):
 # Post answer form
 class PostReplyForm(Form):
     answer_id = StringField(validators=[DataRequired()])
+    question_id = StringField(validators=[DataRequired()])
     comment = PageDownField('Reply', validators=[DataRequired()])

@@ -50,6 +50,7 @@ class ForumQuestion(db.Model):
     date_posted = db.Column(db.DateTime, default=datetime.utcnow)
     question_owner_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
     answers = db.relationship('ForumAnswer', backref='forum_question', lazy='dynamic')
+    answer_reply = db.relationship('ForumAnswerReply', backref='forum_question', lazy='dynamic')
     question_votes = db.relationship('QuestionVotes', backref='forum_question', lazy='dynamic')
 
     def __repr__(self):
@@ -71,6 +72,7 @@ class ForumAnswerReply(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     reply_text = db.Column(db.String(80))
     date_posted = db.Column(db.DateTime, default=datetime.utcnow)
+    question_id = db.Column(db.Integer, db.ForeignKey('forum_question.id'), nullable=False)
     reply_owner_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
     reply_answer_id = db.Column(db.Integer, db.ForeignKey('forum_answer.id'), nullable=False)
 

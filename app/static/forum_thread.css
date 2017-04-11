@@ -206,12 +206,12 @@
 	border-radius: 0 0 4px 4px;
 }
 
-.comment-box .comment-name.by-author, .comment-box .comment-name.by-author a {color: #03658c;}
+.comment-box .comment-name.by-author, .comment-box .comment-name.by-author a {color: #00cc00;}
 .comment-box .comment-name.by-author:after {
-	content: 'autor';
-	background: #03658c;
+	content: 'owner';
+	background: #00cc00;
 	color: #FFF;
-	font-size: 12px;
+	font-size: 18px;
 	padding: 3px 5px;
 	font-weight: 700;
 	margin-left: 10px;
@@ -219,6 +219,11 @@
 	-moz-border-radius: 3px;
 	border-radius: 3px;
 }
+
+#answer_id {
+    display:none;
+}
+
 
 #answer-upload {
     resize:none
