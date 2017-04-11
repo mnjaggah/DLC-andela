@@ -8,7 +8,7 @@ from .models import User
 
 class SigninForm(Form):
     username = StringField('Username', validators=[
-        DataRequired(), Length(1, 64), Regexp('^[A-Za-z][A-Za-z0-9_.]*$', 0,
+        DataRequired(), Length(1, 64), Regexp('^[A-Za-z][A-Za-z0-9_." "]*$', 0,
                                               'Usernames must have only letters, '
                                               'numbers, dots or underscores')])
     password = PasswordField('Password', validators=[DataRequired()])
@@ -21,7 +21,7 @@ class SignupForm(Form):
     email = StringField('Email', validators=[DataRequired(), Length(1, 64),
                                            Email()])
     username = StringField('Username', validators=[
-        DataRequired(), Length(3, 64), Regexp('^[A-Za-z][A-Za-z0-9_.]*$', 0,
+        DataRequired(), Length(3, 64), Regexp('^[A-Za-z][A-Za-z0-9_."   "]*$', 0,
                                           'Usernames must have only letters, '
                                           'numbers, dots or underscores')])
     password = PasswordField('Password', validators=[ DataRequired(), EqualTo('password2', message='Passwords must match.')])

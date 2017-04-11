@@ -8,7 +8,7 @@ My Dashboard | Welcome
       <section id="content">        
 
         <!--start container-->
-        <div class="container">
+        <!--<div class="container">-->
 <!--<div class=" center-align"> -->
           <div id="profile-page" class="section">
             <!-- profile-page-header -->
@@ -19,6 +19,7 @@ My Dashboard | Welcome
                 <figure class="card-profile-image">
                     <img src="../static/avatar.png"width=20% height="=20%" alt="profile image" class="circle z-depth-2 responsive-img activator">
                 </figure>
+                
                 <div class="card-content">
                   <div class="row">                    
                     <div class="col s3 offset-s2">                        
@@ -53,7 +54,17 @@ My Dashboard | Welcome
   
                 </div>
             </div>
+                            <div class="fixed-action-btn">
+                    <a class="btn-floating btn-large dark blue">
+                        <i class="large material-icons">edit</i>
+                    </a>
+                    <ul>
+                        <li><a class="btn-floating green"><i class="material-icons">edit</i></a></li>
+                        <li><a class="btn-floating green"><i class="material-icons">chat</i></a></li>
+                    </ul>
+                </div>
+{% block fab%}
 
 
-
+{%  endblock%}
 {%  endblock%}
