@@ -5,7 +5,54 @@ My Dashboard | Welcome
 {% block content %}
 
 
+      <section id="content">        
 
+        <!--start container-->
+        <div class="container">
+<!--<div class=" center-align"> -->
+          <div id="profile-page" class="section">
+            <!-- profile-page-header -->
+            <div id="profile-page-header" class="card">
+                <!--<div class="card-image waves-effect waves-block waves-light">
+                    <img class="activator" src="../static/user-bg.jpg">                  
+                </div>-->
+                <figure class="card-profile-image">
+                    <img src="../static/avatar.png"width=20% height="=20%" alt="profile image" class="circle z-depth-2 responsive-img activator">
+                </figure>
+                <div class="card-content">
+                  <div class="row">                    
+                    <div class="col s3 offset-s2">                        
+                        <h4 class="card-title grey-text text-darken-4">{{ current_user.username|capitalize }}</h4>
+                        <p class="medium-small grey-text">Learner</p>                        
+                    </div>
+                    <div class="col s2 center-align">
+                        <h4 class="card-title grey-text text-darken-4">Checkpoint</h4>
+                        <p class="medium-small grey-text">1</p>                        
+                    </div>
+                    <div class="col s2 center-align">
+                        <h4 class="card-title grey-text text-darken-4">Courses</h4>
+                        <p class="medium-small grey-text">3</p>                        
+                    </div>                    
+                    <div class="col s2 center-align">
+                        <h4 class="card-title grey-text text-darken-4">Level</h4>
+                        <p class="medium-small grey-text">Proffesional</p>                        
+                    </div>                    
+                    <div class="col s1 right-align">
+                      <a class="btn-floating activator waves-effect waves-light blue right">
+                          <i class="material-icons left">account_circle</i>
+    
+                      </a>
+                    </div>
+                  </div>
+                </div>
+                <div class="card-reveal">
+                    <p>
+   <span class="card-title grey-text text-darken-4">Card Title<i class="material-icons right">close</i></span>
+                    </p>
+
+  
+                </div>
+            </div>
 
 
 
