@@ -52,6 +52,7 @@ class Skill(Base):
         new_challenge = Challenge(self.board_name, self.skill_name, challenge_name)
         session.add(new_challenge)
         session.comit()
+        return new_challenge
     
     def change_to_doing(self):
         self.status = "Doing"
@@ -76,6 +77,7 @@ class Board(Base):
         new_card = Skill(self.name, card_name)
         session.add(new_card)
         session.comit()
+        return new_skill
 
 Base.metadata.create_all(engine)
 
