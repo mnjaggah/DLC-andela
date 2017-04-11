@@ -45,3 +45,9 @@ class CoursesForm(FlaskForm):
     description = TextField(
         'Description', validators=[DataRequired()])
     submit = SubmitField('Create')
+
+
+class ResourcesForm(FlaskForm):
+    """ Form for admin to add resources link """
+    url = URLField('URL', validators=[DataRequired()])
+    submit = SubmitField('Add')
