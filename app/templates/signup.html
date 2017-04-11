@@ -25,7 +25,7 @@
 <body class="indigo">
   <div id="login-page" class="row">
     <div class="col l12 z-depth-4 card-panel">
-      <form class="login-form" action="{{ url_for('signup') }}" method="post" role="form">
+      <form class="login-form" action="{{ url_for('auth.signup') }}" method="post" role="form">
         {{ form.hidden_tag() }}
         <div class="row">
           <div class="input-field col s12 center">
@@ -66,7 +66,7 @@
               <button class="btn pink waves-effect waves-light col s12" type="submit">Register now
           </div>
           <div class="input-field col s12">
-            <p class="margin center medium-small sign-up">Already have an account? <a href="{{url_for("login")}}">Login</a></p>
+            <p class="margin center medium-small sign-up">Already have an account? <a href="{{url_for("auth.login")}}">Login</a></p>
           </div>
         </div>
       </form>
