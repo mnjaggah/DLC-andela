@@ -1,0 +1,167 @@
+{% extends "base.html" %}
+{% block title %}
+Forums | Ask A question
+{% endblock %}
+
+{% block content %}
+<div class="container">
+	<div class="row">
+	<!-- Contenedor Principal -->
+    <div class="comments-container">
+		<h1>Question </h1>
+        <hr>
+
+        <ul id="comments-list" class="comments-list">
+			<li>
+                <div class="comment-main-level">
+                    <!-- Avatar -->
+                    <div class="comment-avatar"><img src="http://i9.photobucket.com/albums/a88/creaticode/avatar_1_zps8e1c80cd.jpg" alt=""></div>
+                    <!-- Contenedor del Comentario -->
+                    <div class="comment-box">
+                        <div class="comment-head">
+                            <h6 class="comment-name by-author"><a href="http://creaticode.com/blog">Agustin Ortiz</a></h6>
+                            <span>hace 20 minutos</span>
+                            <i class="fa fa-reply"></i>
+                            <i class="fa fa-heart"></i>
+                        </div>
+                        <div class="comment-content">
+                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Velit omnis animi et iure laudantium vitae, praesentium optio, sapiente distinctio illo?
+                        </div>
+                    </div>
+                </div>
+            </li>
+        </ul>
+
+
+        <h1> Answers </h1>
+        <hr>
+
+		<ul id="comments-list" class="comments-list">
+			<li>
+				<div class="comment-main-level">
+					<!-- Avatar -->
+					<div class="comment-avatar"><img src="http://i9.photobucket.com/albums/a88/creaticode/avatar_1_zps8e1c80cd.jpg" alt=""></div>
+					<!-- Contenedor del Comentario -->
+					<div class="comment-box">
+						<div class="comment-head">
+							<h6 class="comment-name by-author"><a href="http://creaticode.com/blog">Agustin Ortiz</a></h6>
+							<span>hace 20 minutos</span>
+							<i class="fa fa-reply"></i>
+							<i class="fa fa-heart"></i>
+						</div>
+						<div class="comment-content">
+							Lorem ipsum dolor sit amet, consectetur adipisicing elit. Velit omnis animi et iure laudantium vitae, praesentium optio, sapiente distinctio illo?
+						</div>
+					</div>
+				</div>
+				<!-- Respuestas de los comentarios -->
+				<ul class="comments-list reply-list">
+					<li>
+						<!-- Avatar -->
+						<div class="comment-avatar"><img src="http://i9.photobucket.com/albums/a88/creaticode/avatar_2_zps7de12f8b.jpg" alt=""></div>
+						<!-- Contenedor del Comentario -->
+						<div class="comment-box">
+							<div class="comment-head">
+								<h6 class="comment-name"><a href="http://creaticode.com/blog">Lorena Rojero</a></h6>
+								<span>hace 10 minutos</span>
+							</div>
+							<div class="comment-content">
+								Lorem ipsum dolor sit amet, consectetur adipisicing elit. Velit omnis animi et iure laudantium vitae, praesentium optio, sapiente distinctio illo?
+							</div>
+						</div>
+					</li>
+
+					<li>
+						<!-- Avatar -->
+						<div class="comment-avatar"><img src="http://i9.photobucket.com/albums/a88/creaticode/avatar_1_zps8e1c80cd.jpg" alt=""></div>
+						<!-- Contenedor del Comentario -->
+						<div class="comment-box">
+							<div class="comment-head">
+								<h6 class="comment-name by-author"><a href="http://creaticode.com/blog">Agustin Ortiz</a></h6>
+								<span>hace 10 minutos</span>
+							</div>
+							<div class="comment-content">
+								Lorem ipsum dolor sit amet, consectetur adipisicing elit. Velit omnis animi et iure laudantium vitae, praesentium optio, sapiente distinctio illo?
+							</div>
+						</div>
+					</li>
+
+                    <div class="row">
+		                <p>add a comment</p>
+	                </div>
+
+                    <div class="row">
+
+                    <div class="col-md-6">
+                        <div class="widget-area no-padding blank">
+                            <div class="status-upload">
+                                <form method="post" action="">
+									<div class="field">
+                        				{% if reply_form.answer_id.errors %}
+                            				{% for error in reply_form.answer_id.errors %}
+                                				<div class="notification_error">
+                                    				{{ error }}
+                                				</div>
+                        					{% endfor %}
+                        				{% endif %}
+                    				</div>
+
+            						{{ reply_form.hidden_tag() }}
+									{{ reply_form.answer_id(value="1", readonly=true) }}
+									{{ reply_form.comment(placeholder="what do you think?", id_='answer-upload textarea') }}
+                                    <button type="submit" class="btn btn-success green"><i class="fa fa-share"></i> Share</button>
+                                </form>
+                            </div><!-- Status Upload  -->
+                        </div><!-- Widget Area -->
+                    </div>
+					</div>
+				</ul>
+			</li>
+
+			<li>
+				<div class="comment-main-level">
+					<!-- Avatar -->
+					<div class="comment-avatar"><img src="http://i9.photobucket.com/albums/a88/creaticode/avatar_2_zps7de12f8b.jpg" alt=""></div>
+					<!-- Contenedor del Comentario -->
+					<div class="comment-box">
+						<div class="comment-head">
+							<h6 class="comment-name"><a href="http://creaticode.com/blog">Lorena Rojero</a></h6>
+							<span>hace 10 minutos</span>
+							<i class="fa fa-reply"></i>
+							<i class="fa fa-heart"></i>
+						</div>
+						<div class="comment-content">
+							Lorem ipsum dolor sit amet, consectetur adipisicing elit. Velit omnis animi et iure laudantium vitae, praesentium optio, sapiente distinctio illo?
+						</div>
+					</div>
+				</div>
+			</li>
+		</ul>
+	</div>
+	</div>
+
+    <hr>
+
+	<div class="row">
+		<h5>what's your answer</h5>
+	</div>
+
+    <div class="row">
+
+    <div class="col-md-6">
+        <div class="widget-area no-padding blank">
+            <div class="status-upload">
+                <form method="post" action="">
+					{{ answer_form.hidden_tag() }}
+					{{ answer_form.answer(placeholder="What are you doing right now?", id_='answer-upload textarea') }}
+                    <button type="submit" class="btn btn-success green"><i class="fa fa-share"></i> Share</button>
+                </form>
+            </div><!-- Status Upload  -->
+        </div><!-- Widget Area -->
+    </div>
+
+    </div>
+</div>
+
+
+{% endblock %}

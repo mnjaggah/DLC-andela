@@ -1,0 +1,75 @@
+{% extends "base.html" %}
+{% block title %}
+Forums | post question
+{% endblock %}
+
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <form method="post" action="" id="post-question-form" class="post-question-form">
+            {{ form.hidden_tag() }}
+            <div class="row">
+                <h3 class="text-center">Ask A Question</h3>
+                <div class="col-md-12">
+                    <div class="field">
+                        {% if form.title.errors %}
+                            {% for error in form.title.errors %}
+                                <div class="notification_error">
+                                    {{ error }}
+                                </div>
+                        {% endfor %}
+                        {% endif %}
+                    </div>
+                    <div class="form-group">
+                        {{ form.title(placeholder="title", class_='form-control') }}
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="field">
+                        {% if form.categories.errors %}
+                            {% for error in form.categories.errors %}
+                                <div class="notification_error">
+                                    {{ error }}
+                                </div>
+                            {% endfor %}
+                        {% endif %}
+
+                    </div>
+                    <div class="form-group">
+                        <p>category</p>
+                        {{ form.categories(class_='form-control') }}
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="field">
+                        {% if form.description.errors %}
+                            {% for error in form.description.errors %}
+                                <div class="notification_error">
+                                    {{ error }}
+                                </div>
+                            {% endfor %}
+                        {% endif %}
+
+                    </div>
+                    <div class="form-group">
+                        {{ form.description(placeholder="description", class_='form-control textarea') }}
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <button type="submit" class="btn main-btn pull-right">Ask Question</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}
