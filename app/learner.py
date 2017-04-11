@@ -27,7 +27,7 @@ class LearnerDashboard:
             return 'you are already enrolled in a course'
 
     def is_complete(self, course_id):
-        if self.get_course_progress(course_id) == 100
+        if self.get_course_progress(course_id) == 100:
             return True
         return False
 
