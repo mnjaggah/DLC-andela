@@ -107,3 +107,7 @@ def add_resource():
         flash('You have successfully added a new resource.')
         return redirect(url_for('list_courses'))
     return render_template('admin/add_course.html', form=form)
+@admin.route('/user/my_checkpoints') 
+@login_required   
+def user_checkpoints():
+    return render_template('admin/user_courses.html')
