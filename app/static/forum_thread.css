@@ -344,6 +344,12 @@
 	font-size: 14px;
 	padding-left: 7%;
 }
+
+select {
+    display: block !important;
+}
+
+
 /** =====================
  * Responsive
  ========================*/
