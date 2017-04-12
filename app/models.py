@@ -17,8 +17,9 @@ class User(db.Model, UserMixin):
     password_hash = db.Column(db.String)
     is_admin = db.Column(db.Boolean, default=False)
     course_id = db.Column(db.Integer, db.ForeignKey('course.id'))
+    task_id = db.Column(db.Integer, db.ForeignKey('task.id'))
     facilitator_id = db.Column(db.Integer, db.ForeignKey('facilitator.user_id'))
-    previous_courses = db.Column(db.PickleType)
+    my_courses = db.Column(db.PickleType)
 
     @property
     def password(self):
