@@ -3,33 +3,59 @@ from .models import User, Course, Task, Target
 
 class LearnerDashboard:
 
-    def get_course_progress(self, course_id):
-        all_tasks = Task.query.filter_by(course_id=course_id).all()
-        completed_tasks = [task for task in all_tasks if self.get_task_progress(task.id) == 100]
-        percent_completion = (len(completed_tasks) / len(all_tasks)) * 100
-        return percent_completion
-
     @staticmethod
-    def get_task_progress(task_id):
-        no_of_targets = len(Target.query.filter_by(task_id=task_id).all())
-        completed_targets = len(Target.query.filter_by(is_done=True))
-        percent_completion = (completed_targets / no_of_targets) * 100
-        return percent_completion
-
-
-    @staticmethod
-    def select_course(user_id, course_id):
+    def get_course_progress(user_id, course_id):
         learner = User.query.get(user_id)
+        tasks_percent_completion = []
+        for course in learner.my_courses:
+            if course.id == course_id:
+                all_tasks = course.tasks
+                for task in all_tasks:
+                    no_of_targets = len(task.targets)
+                    completed_targets = len([target for target in task.targets if target.is_done])
+                    percent_completion = (completed_targets / no_of_targets) * 100
+                    result = {task.id: percent_completion}
+                    tasks_percent_completion.append(result)
+            else:
+                return 'The specified course is not in users catalog'
+        return tasks_percent_completion
+
+    def select_course(self, user_id, course_id):
+        learner = User.query.get(user_id)
+        my_courses = []
         current_course = learner.course_id
         if not current_course:
             learner.course_id = course_id
+            current_course = Course.query.get(course_id)
+            my_courses.append(current_course)
+            learner.my_courses = my_courses
         else:
-            return 'you are already enrolled in a course'
+            for course in learner.my_courses:
+                if course.id == learner.course_id:
+                    if not self.is_complete(user_id, course.id):
+                        return 'Current course is not complete'
+                    else:
+                        learner.course_id = None
+                        return 'Current course is complete. You can proceed'
+                else:
+                    return 'The specified course is not in users catalog'
 
-    def is_complete(self, course_id):
-        if self.get_course_progress(course_id) == 100:
-            return True
-        return False
+    def select_task(self, user_id, course_id, task_id):
+        learner = User.query.get(user_id)
+        current_course = learner.course_id
+        for course in learner.my_courses:
+            if course.id == current_course:
+                current_task = learner.task_id
+                if not current_task:
+                    learner.task_id = task_id
+                else:
+                    tasks_progress = self.get_course_progress(user_id, current_course)
+                    is_task_complete = [x for x in tasks_progress if x.get(task_id) == 100]
+                    if is_task_complete:
+                        return 'task complete'
+                    else:
+                        return 'task incomplete'
+
 
     @staticmethod
     def get_course_info(course_id):
@@ -82,6 +108,10 @@ class LearnerDashboard:
     def get_all_task_targets(task_id):
         all_targets = Target.query.filter_by(task_id=task_id)
         return all_targets
+
+
+
+
 
 
 
