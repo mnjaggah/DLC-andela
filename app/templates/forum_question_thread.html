@@ -5,115 +5,141 @@ Forums | Ask A question
 
 {% block content %}
 <div class="container">
+
 	<div class="row">
-	<!-- question title -->
-    <div class="comments-container">
-		<h4>Q: {{ my_question.forum_title }} </h4>
-        <hr>
+		<div class="page-header page-heading">
+			{% if my_question.forum_category == 'Beginner' %}
+				<a href="{{ url_for ('list_forum_questions_beginner') }}" class="btn main-btn pull-left"> list </a>
+			{% elif my_question.forum_category == 'Intermediate' %}
+				<a href="{{ url_for ('list_forum_questions_intermediate') }}" class="btn main-btn pull-left"> list </a>
+			{% elif my_question.forum_category == 'professional' %}
+				<a href="{{ url_for ('list_forum_questions_professional') }}" class="btn main-btn pull-left"> list </a>
+			{% else %}
+				<a href="{{ url_for ('list_forum_questions_faq') }}" class="btn main-btn pull-left"> list </a>
+			{% endif %}
 
-        <ul id="comments-list" class="comments-list">
-			<li>
-                <div class="comment-main-level">
-                    <!-- Avatar -->
-                    <div class="comment-avatar"><img src="http://i9.photobucket.com/albums/a88/creaticode/avatar_1_zps8e1c80cd.jpg" alt=""></div>
-                    <!-- Cmain question -->
-                    <div class="comment-box">
-                        <div class="comment-head">
-                            <h6 class="comment-name by-author">
-								<a href="http://creaticode.com/blog">{{ my_question.user.username }}</a>
-							</h6>
-                            <span>{{ my_question.date_posted.strftime('%d-%m-%Y') }}</span>
-                            <i class="fa fa-heart"></i>
-                        </div>
-                        <div class="comment-content">
-                            {{ my_question.forum_question }}
-                        </div>
-                    </div>
-                </div>
-            </li>
-        </ul>
+			<a href="{{ url_for ('post_forum_question') }}" class="btn main-btn pull-right">Ask Question</a>
+		</div>
+		<!-- question title -->
+		<div class="comments-container">
+			<br>
+			<h4>Q: {{ my_question.forum_title }} </h4>
+			<hr>
 
-
-        <h1> Answers </h1>
-        <hr>
-		{% for answer in answer_stream %}
-		<ul id="comments-list" class="comments-list">
-			<li>
-				<div class="comment-main-level">
-					<!-- Avatar -->
-					<div class="comment-avatar"><img src="http://i9.photobucket.com/albums/a88/creaticode/avatar_1_zps8e1c80cd.jpg" alt=""></div>
-					<!-- list of answers -->
-					<div class="comment-box">
-						<div class="comment-head">
-							<h6 class="comment-name by-author">
-								<a href="http://creaticode.com/blog">{{ answer.user.username }}</a></h6>
-							<span>{{ answer.date_posted.strftime('%d-%m-%Y') }}</span>
-							<i class="fa fa-reply"></i>
-							<i class="fa fa-heart"></i>
-						</div>
-						<div class="comment-content">
-							{{ answer.forum_answer }}
+			<ul id="comments-list" class="comments-list">
+				<li>
+					<div class="comment-main-level">
+						<!-- Avatar -->
+						<div class="comment-avatar"><img src="http://i9.photobucket.com/albums/a88/creaticode/avatar_1_zps8e1c80cd.jpg" alt=""></div>
+						<!-- Cmain question -->
+						<div class="comment-box">
+							<div class="comment-head">
+								<h6 class="comment-name by-author">
+									<a href="http://creaticode.com/blog">{{ my_question.user.username }}</a>
+								</h6>
+								<span>{{ my_question.date_posted.strftime('%d-%m-%Y') }}</span>
+								<i class="fa fa-heart"></i>
+							</div>
+							<div class="comment-content">
+								{{ my_question.forum_question }}
+							</div>
 						</div>
 					</div>
-				</div>
-				<!-- reply list -->
-
-				<ul class="comments-list reply-list">
-					{% for reply in reply_stream %}
-						{% if reply.reply_answer_id == answer.id %}
-							<li>
-									<!-- Avatar -->
-									<div class="comment-avatar"><img src="http://i9.photobucket.com/albums/a88/creaticode/avatar_2_zps7de12f8b.jpg" alt=""></div>
-									<!-- reply-->
-									<div class="comment-box">
-										<div class="comment-head">
-											<h6 class="comment-name"><a href="http://creaticode.com/blog">{{ reply.user.username }}</a></h6>
-											<span>{{ reply.date_posted.strftime('%d-%m-%Y') }}</span>
-										</div>
-										<div class="comment-content">
-											{{ reply.reply_text}}
-										</div>
-									</div>
-							</li>
+				</li>
+			</ul>
 
 
-						{% endif %}
-					{% endfor %}
-					<div class="row">
-							  <button type="button" class="show-hide-form">add a comment</button>
-					</div>
+			<h1> Answers </h1>
+			<hr>
+			{% if answer_stream|length == 0 %}
+			<table class="table forum table-striped">
+				<tbody>
+				  <tr>
+					<td></td>
+					<td colspan="4" class="center">No Answers have been added yet.</td>
+				  </tr>
+				</tbody>
+			</table>
+			{% else %}
+				{% for answer in answer_stream %}
+				<ul id="comments-list" class="comments-list">
+					<li>
+						<div class="comment-main-level">
+							<!-- Avatar -->
+							<div class="comment-avatar"><img src="http://i9.photobucket.com/albums/a88/creaticode/avatar_1_zps8e1c80cd.jpg" alt=""></div>
+							<!-- list of answers -->
+							<div class="comment-box">
+								<div class="comment-head">
+									<h6 class="comment-name by-author">
+										<a href="http://creaticode.com/blog">{{ answer.user.username }}</a></h6>
+									<span>{{ answer.date_posted.strftime('%d-%m-%Y') }}</span>
+									<i class="fa fa-reply"></i>
+									<i class="fa fa-heart"></i>
+								</div>
+								<div class="comment-content">
+									{{ answer.forum_answer }}
+								</div>
+							</div>
+						</div>
+						<!-- reply list -->
 
-					<div class="row nested-replies-form">
+						<ul class="comments-list reply-list">
+							{% for reply in reply_stream %}
+								{% if reply.reply_answer_id == answer.id %}
+									<li>
+											<!-- Avatar -->
+											<div class="comment-avatar"><img src="http://i9.photobucket.com/albums/a88/creaticode/avatar_2_zps7de12f8b.jpg" alt=""></div>
+											<!-- reply-->
+											<div class="comment-box">
+												<div class="comment-head">
+													<h6 class="comment-name"><a href="http://creaticode.com/blog">{{ reply.user.username }}</a></h6>
+													<span>{{ reply.date_posted.strftime('%d-%m-%Y') }}</span>
+												</div>
+												<div class="comment-content">
+													{{ reply.reply_text}}
+												</div>
+											</div>
+									</li>
 
-					  <div class="col-md-6">
-						<div class="widget-area no-padding blank">
-						  <div class="status-upload">
-							<form method="post" action="">
-							  <div class="field">
-								{% if reply_form.answer_id.errors %}
-								  {% for error in reply_form.answer_id.errors %}
-									<div class="notification_error">
-									  {{ error }}
-									</div>
-								  {% endfor %}
+
 								{% endif %}
-							  </div>
+							{% endfor %}
+							<div class="row">
+									  <button type="button" class="show-hide-form">add a comment</button>
+							</div>
 
-							  {{ reply_form.hidden_tag() }}
-							  {{ reply_form.answer_id(value= answer.id , readonly=true, style="display:none;") }}
-							  {{ reply_form.question_id(value= my_question.id, readonly=true, style="display:none;") }}
-							  {{ reply_form.comment(placeholder="what do you think?", id_='answer-upload textarea') }}
-							  <button type="submit" class="btn btn-success green"><i class="fa fa-share"></i> Share</button>
-							</form>
-						  </div><!-- Status Upload  -->
-						</div><!-- Widget Area -->
-					  </div>
-					</div>
+							<div class="row nested-replies-form">
+
+							  <div class="col-md-6">
+								<div class="widget-area no-padding blank">
+								  <div class="status-upload">
+									<form method="post" action="">
+									  <div class="field">
+										{% if reply_form.answer_id.errors %}
+										  {% for error in reply_form.answer_id.errors %}
+											<div class="notification_error">
+											  {{ error }}
+											</div>
+										  {% endfor %}
+										{% endif %}
+									  </div>
+
+									  {{ reply_form.hidden_tag() }}
+									  {{ reply_form.answer_id(value= answer.id , readonly=true, style="display:none;") }}
+									  {{ reply_form.question_id(value= my_question.id, readonly=true, style="display:none;") }}
+									  {{ reply_form.comment(placeholder="what do you think?", id_='answer-upload textarea') }}
+									  <button type="submit" class="btn btn-success green"><i class="fa fa-share"></i> Share</button>
+									</form>
+								  </div><!-- Status Upload  -->
+								</div><!-- Widget Area -->
+							  </div>
+							</div>
+						</ul>
+					</li>
 				</ul>
-			</li>
-		</ul>
-		{% endfor %}
-	</div>
+				{% endfor %}
+			{% endif %}
+		</div>
 	</div>
 
     <hr>

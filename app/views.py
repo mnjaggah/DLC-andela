@@ -74,7 +74,16 @@ def signup():
 @app.route('/forum_categories')
 @login_required
 def forum_categories():
-    return render_template('forum.html')
+    beginner = ForumQuestion.query.filter_by(forum_category='Beginner').all()
+    latest_b_question = ForumQuestion.query.filter_by(forum_category='Beginner').order_by('-id').first()
+    intermediate = ForumQuestion.query.filter_by(forum_category='Intermediate').all()
+    latest_i_question = ForumQuestion.query.filter_by(forum_category='Intermediate').order_by('-id').first()
+    professional = ForumQuestion.query.filter_by(forum_category='professional').all()
+    latest_p_question = ForumQuestion.query.filter_by(forum_category='professional').order_by('-id').first()
+    faq = ForumQuestion.query.filter_by(forum_category='FAQ').all()
+    latest_f_question = ForumQuestion.query.filter_by(forum_category='FAQ').order_by('-id').first()
+    return render_template('forum.html', beginner=beginner, intermediate=intermediate, professional=professional,
+                           faq=faq, b=latest_b_question, i=latest_i_question, p=latest_p_question, f=latest_f_question)
 
 
 @app.route('/post_forum_question', methods=('GET', 'POST'))
@@ -82,20 +91,51 @@ def forum_categories():
 def post_forum_question():
     form = PostQuestionForm()
     if form.validate_on_submit():
+        cat = request.form['categories']
         question = ForumQuestion(question_owner_id=current_user.id,
                                  forum_title=form.title.data.strip(),
                                  forum_category=form.categories.data,
                                  forum_question=form.description.data)
         db.session.add(question)
         db.session.commit()
-        return redirect(url_for('list_forum_questions'))
+
+        if cat == 'Beginner':
+            return redirect(url_for('list_forum_questions_beginner'))
+        elif cat == 'Intermediate':
+            return redirect(url_for('list_forum_questions_intermediate'))
+        elif cat == 'professional':
+            return redirect(url_for('list_forum_questions_professional'))
+        else:
+            return redirect(url_for('list_forum_questions_faq'))
     return render_template('post_question.html', form=form)
 
 
-@app.route('/list_forum_questions')
+@app.route('/list_forum_questions/beginner', methods=('GET', 'POST'))
 @login_required
-def list_forum_questions():
-    return render_template('forum_questions.html')
+def list_forum_questions_beginner():
+    questions = ForumQuestion.query.filter_by(forum_category='Beginner').order_by('-id').all()
+    return render_template('forum_questions.html', questions=questions, forum_name='Beginner')
+
+
+@app.route('/list_forum_questions/intermediate', methods=('GET', 'POST'))
+@login_required
+def list_forum_questions_intermediate():
+    questions = ForumQuestion.query.filter_by(forum_category='Intermediate').order_by('-id').all()
+    return render_template('forum_questions.html', questions=questions, forum_name='Intermediate')
+
+
+@app.route('/list_forum_questions/professional', methods=('GET', 'POST'))
+@login_required
+def list_forum_questions_professional():
+    questions = ForumQuestion.query.filter_by(forum_category='professional').order_by('-id').all()
+    return render_template('forum_questions.html', questions=questions, forum_name='professional')
+
+
+@app.route('/list_forum_questions/faq', methods=('GET', 'POST'))
+@login_required
+def list_forum_questions_faq():
+    questions = ForumQuestion.query.filter_by(forum_category='FAQ').order_by('-id').all()
+    return render_template('forum_questions.html', questions=questions, forum_name='FAQ')
 
 
 @app.route('/question_thread/<int:question_id>', methods=('GET', 'POST'))

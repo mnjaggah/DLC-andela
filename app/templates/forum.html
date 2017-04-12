@@ -12,22 +12,20 @@ Forums | Ask A question
 <div class="container" style="margin-top: 35px">
   <div class="page-header page-heading">
     <h3 class="pull-left">Forums</h3>
-    <ol class="breadcrumb pull-right where-am-i">
-      <li><a href="#">Forums</a></li>
-      <li class="active">List of topics</li>
-    </ol>
+    <a href="{{ url_for ('post_forum_question') }}" class="btn main-btn pull-right">Ask Question</a>
+
     <div class="clearfix"></div>
   </div>
   <p class="lead">This is the right place to discuss any ideas, critics, feature requests and all the ideas regarding our website. Please follow the forum rules and always check FAQ before posting to prevent duplicate posts.</p>
+  <p> if you couldn't find your question in the list below, please click on the button to the right and fill in the form to submit your question </p>
   <table class="table forum table-striped">
     <thead>
       <tr>
         <th class="cell-stat"></th>
         <th>
-          <h5>Important</h5>
+          <h5>Categories</h5>
         </th>
         <th class="cell-stat text-center hidden-xs hidden-sm">Questions</th>
-        <th class="cell-stat text-center hidden-xs hidden-sm">Answers</th>
         <th class="cell-stat-2x hidden-xs hidden-sm">Last Post</th>
       </tr>
     </thead>
@@ -35,66 +33,77 @@ Forums | Ask A question
       <tr>
         <td class="text-center"><i class="fa fa-question fa-2x text-primary"></i></td>
         <td>
-          <h5><a href="#">Frequently Asked Questions</a><br><small>Some description</small></h5>
+          <h6><a href="{{ url_for ('list_forum_questions_faq' ) }}">Frequently Asked Questions</a><br>
+            <small>These are some of the most common questions and answers about DLC</small>
+          </h6>
         </td>
-        <td class="text-center hidden-xs hidden-sm"><a href="#">9 542</a></td>
-        <td class="text-center hidden-xs hidden-sm"><a href="#">89 897</a></td>
-        <td class="hidden-xs hidden-sm">by <a href="#">John Doe</a><br><small><i class="fa fa-clock-o"></i> 3 months ago</small></td>
+        <td class="text-center hidden-xs hidden-sm"><a href="#">{{ faq|length }}</a></td>
+
+        {% if f %}
+        <td class="hidden-xs hidden-sm">by <a href="#">{{ f.user.username }}</a><br>
+          <small><i class="fa fa-clock-o"></i> 3 months ago</small>
+        </td>
+        {% else %}
+        <td class="hidden-xs hidden-sm">
+          None
+        </td>
+        {% endif %}
+
       </tr>
       <tr>
-        <td class="text-center"><i class="fa fa-exclamation fa-2x text-danger"></i></td>
+        <td class="text-center"><i class="fa fa-battery-empty fa-2x text-danger"></i></td>
         <td>
-          <h5><a href="#">Important changes</a><br><small>Category description</small></h5>
+          <h6><a href="{{ url_for ('list_forum_questions_beginner') }}">Beginner</a><br>
+            <small>Questions and answers about Beginner level courses</small>
+          </h6>
         </td>
-        <td class="text-center hidden-xs hidden-sm"><a href="#">6532</a></td>
-        <td class="text-center hidden-xs hidden-sm"><a href="#">152123</a></td>
-        <td class="hidden-xs hidden-sm">by <a href="#">Jane Doe</a><br><small><i class="fa fa-clock-o"></i> 1 years ago</small></td>
+
+        <td class="text-center hidden-xs hidden-sm"><a href="#">{{ beginner|length }}</a></td>
+        {% if b %}
+        <td class="hidden-xs hidden-sm">by <a href="#">{{ b.user.username }}</a><br>
+          <small><i class="fa fa-clock-o"></i> 1 years ago</small>
+        </td>
+        {% else %}
+        <td class="hidden-xs hidden-sm">
+          None
+        </td>
+        {% endif %}
       </tr>
       <tr>
-        <td class="text-center"><i class="fa fa-question fa-2x text-primary"></i></td>
+        <td class="text-center"><i class="fa fa-battery-half fa-2x text-primary"></i></td>
         <td>
-          <h5><a href="#">Frequently Asked Questions</a><br><small>Some description</small></h5>
+          <h6><a href="{{ url_for ('list_forum_questions_intermediate') }}">Intermediate</a><br>
+            <small>Questions and answers about Intermediate level courses</small>
+          </h6>
         </td>
-        <td class="text-center hidden-xs hidden-sm"><a href="#">9 542</a></td>
-        <td class="text-center hidden-xs hidden-sm"><a href="#">89 897</a></td>
-        <td class="hidden-xs hidden-sm">by <a href="#">John Doe</a><br><small><i class="fa fa-clock-o"></i> 3 months ago</small></td>
+        <td class="text-center hidden-xs hidden-sm"><a href="#">{{ intermediate|length }}</a></td>
+        {% if i %}
+        <td class="hidden-xs hidden-sm">by <a href="#">{{ i.user.username }}</a><br>
+          <small><i class="fa fa-clock-o"></i> 3 months ago</small>
+        </td>
+        {% else %}
+        <td class="hidden-xs hidden-sm">
+          None
+        </td>
+        {% endif %}
       </tr>
       <tr>
-        <td class="text-center"><i class="fa fa-question fa-2x text-primary"></i></td>
+        <td class="text-center"><i class="fa fa-battery-full fa-2x text-primary"></i></td>
         <td>
-          <h5><a href="#">Frequently Asked Questions</a><br><small>Some description</small></h5>
+          <h6><a href="{{ url_for ('list_forum_questions_professional' ) }}">Professional</a><br>
+            <small>Questions and answers about Professional level courses</small>
+          </h6>
         </td>
-        <td class="text-center hidden-xs hidden-sm"><a href="#">9 542</a></td>
-        <td class="text-center hidden-xs hidden-sm"><a href="#">89 897</a></td>
-        <td class="hidden-xs hidden-sm">by <a href="#">John Doe</a><br><small><i class="fa fa-clock-o"></i> 3 months ago</small></td>
-      </tr>
-      <tr>
-        <td class="text-center"><i class="fa fa-question fa-2x text-primary"></i></td>
-        <td>
-          <h5><a href="#">Frequently Asked Questions</a><br><small>Some description</small></h5>
+        <td class="text-center hidden-xs hidden-sm"><a href="#">{{ professional|length }}</a></td>
+        {% if p %}
+        <td class="hidden-xs hidden-sm">by <a href="#">{{ p.user.username }}</a><br>
+          <small><i class="fa fa-clock-o"></i> 3 months ago</small>
         </td>
-        <td class="text-center hidden-xs hidden-sm"><a href="#">9 542</a></td>
-        <td class="text-center hidden-xs hidden-sm"><a href="#">89 897</a></td>
-        <td class="hidden-xs hidden-sm">by <a href="#">John Doe</a><br><small><i class="fa fa-clock-o"></i> 3 months ago</small></td>
-      </tr>
-    </tbody>
-  </table>
-  <table class="table forum table-striped">
-    <thead>
-      <tr>
-        <th class="cell-stat"></th>
-        <th>
-          <h5>Open discussion</h5>
-        </th>
-        <th class="cell-stat text-center hidden-xs hidden-sm">Topics</th>
-        <th class="cell-stat text-center hidden-xs hidden-sm">Posts</th>
-        <th class="cell-stat-2x hidden-xs hidden-sm">Last Post</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td></td>
-        <td colspan="4" class="center">No topics have been added yet.</td>
+        {% else %}
+        <td class="hidden-xs hidden-sm">
+          None
+        </td>
+        {% endif %}
       </tr>
     </tbody>
   </table>
