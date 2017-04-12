@@ -3,7 +3,10 @@
 My Dashboard | Welcome
 {% endblock %}
 {% block content %}
+{% block fab %}
 
+{% endblock %}
+{% for course in courses %}
 <div class="row">
     <div class="col s12 m12 l4">
             <div class="card">
@@ -11,92 +14,24 @@ My Dashboard | Welcome
                         <img class="activator small" src="../static/index.jpg">
                     </div>-->
                     <div class="card-content">
-                        <span class="card-title activator grey-text text-darken-4">PYTHON<i class="material-icons right">more_vert</i></span>
-                        <p><a href="{{url_for('main.admin_checkpoints')}}">View Course</a></p>
+                        <span class="card-title activator grey-text text-darken-4">{{course.name}}<i class="material-icons right">more_vert</i></span>
+                        <p><a href="{{url_for('admin.add_tasks', id=course.id)}}">View Course</a></p>
                     </div>
                     <div class="card-reveal">
-                        <span class="card-title grey-text text-darken-4">Check Point<i class="material-icons right">close</i></span>
-                        <p>Based on Python Frameworks</p>
+                        <span class="card-title grey-text text-darken-4">4 Checkpoints<i class="material-icons right">close</i></span>
+                        <p>{{course.description}}</p>
                     </div>
   </div>
     </div>
-    <div class="col s12 m12 l4">
-            <div class="card">
-                    <!--<div class="card-image waves-effect waves-block waves-light">
-                        <img class="activator small" src="../static/index.jpg">
-                    </div>-->
-                    <div class="card-content">
-                        <span class="card-title activator grey-text text-darken-4">RUBY<i class="material-icons right">more_vert</i></span>
-                        <p><a href="{{url_for('admin.user_checkpoints')}}">View Course</a></p>
-                    </div>
-                    <div class="card-reveal">
-                        <span class="card-title grey-text text-darken-4">Check Point<i class="material-icons right">close</i></span>
-                        <p>Here is some more informationn.</p>
-                    </div>
-  </div>
-    </div>
-        <div class="col s12 m12 l4">
-            <div class="card">
-                    <!--<div class="card-image waves-effect waves-block waves-light">
-                        <img class="activator small" src="../static/index.jpg">
-                    </div>-->
-                    <div class="card-content">
-                        <span class="card-title activator grey-text text-darken-4">JAVA SCRIPT<i class="material-icons right">more_vert</i></span>
-                        <p><a href="{{url_for('admin.user_checkpoints')}}">View Course</a></p>
-                    </div>
-                    <div class="card-reveal">
-                        <span class="card-title grey-text text-darken-4">Check Point<i class="material-icons right">close</i></span>
-                        <p>Here is some more information.</p>
-                    </div>
-  </div>
-    </div>
-        <div class="col s12 m12 l4">
-            <div class="card">
-                    <!--<div class="card-image waves-effect waves-block waves-light">
-                        <img class="activator small" src="../static/index.jpg">
-                    </div>-->
-                    <div class="card-content">
-                        <span class="card-title activator grey-text text-darken-4">HTML<i class="material-icons right">more_vert</i></span>
-                        <p><a href="{{url_for('admin.user_checkpoints')}}">View Course</a></p>
-                    </div>
-                    <div class="card-reveal">
-                        <span class="card-title grey-text text-darken-4">Check Point<i class="material-icons right">close</i></span>
-                        <p>Here is some more information about this product that is only revealed once clicked on.</p>
-                    </div>
-  </div>
-    </div>
-        <div class="col s12 m12 l4">
-            <div class="card">
-                    <!--<div class="card-image waves-effect waves-block waves-light">
-                        <img class="activator small" src="../static/index.jpg">
-                    </div>-->
-                    <div class="card-content">
-                        <span class="card-title activator grey-text text-darken-4">C++<i class="material-icons right">more_vert</i></span>
-                        <p><a href="{{url_for('admin.user_checkpoints')}}">View Course</a></p>
-                    </div>
-                    <div class="card-reveal">
-                        <span class="card-title grey-text text-darken-4">Check Point<i class="material-icons right">close</i></span>
-                        <p>Here is some more information about this product that is only revealed once clicked on.</p>
-                    </div>
-  </div>
-    </div>
-        <div class="col s12 m12 l4">
-            <div class="card">
-                    <!--<div class="card-image waves-effect waves-block waves-light">
-                        <img class="activator small" src="../static/index.jpg">
-                    </div>-->
-                    <div class="card-content">
-                        <span class="card-title activator grey-text text-darken-4">C#<i class="material-icons right">more_vert</i></span>
-                        <p><a href="{{url_for('admin.user_checkpoints')}}">View Course</a></p>
-                    </div>
-                    <div class="card-reveal">
-                        <span class="card-title grey-text text-darken-4">Check Point<i class="material-icons right">close</i></span>
-                        <p>Here is some more information about this product that is only revealed once clicked on.</p>
-                    </div>
-  </div>
-    </div>
-    
+    {% endfor%}
+</div>
+                <div class="fixed-action-btn">
+                    <a class="btn-floating btn-large dark blue">
+                        <i class="large material-icons">add</i>
+                    </a>
+                    <ul>
+                        <li><a class="btn-floating red" href="{{ url_for('admin.add_course')}}"><i class="material-icons">insert_chart</i></a></li>
+                         <li><a class="btn-floating red" href="#"><i class="material-icons">insert_chart</i></a></li>
+                </div>
 
-
-
-{% endblock %}%}
+{% endblock %}

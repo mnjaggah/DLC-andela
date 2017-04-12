@@ -1,8 +1,8 @@
 from flask import render_template, flash, redirect, request, url_for
 from flask_login import login_required, login_user, logout_user, current_user
 from . import main
-from .learner import LearnerDashboard as ld
-from ..models import User, Course, Task, Target
+# from .learner import LearnerDashboard as ld
+from ..models import User, Course, Tasks, Target
 from .. import db
 
 
@@ -11,8 +11,8 @@ from .. import db
 @main.route('/dashboard')
 @login_required
 def dashboard():
-    all_courses = ld.get_all_courses()
-    return render_template('learner_dashboard.html', all_courses=all_courses)
+    # all_courses = ld.get_all_courses()
+    return render_template('learner_dashboard.html',) #all_courses=all_courses)
 
 
 @main.route('/admin/dashboard')
@@ -33,13 +33,14 @@ def user():
 
 @main.route('/user/my_checkpoints')
 def user_checkpoints():
-    all_course_tasks = ld.get_all_course_tasks(1)
-    return render_template('user_courses.html', course_tasks=all_course_tasks)
+    # all_course_tasks = ld.get_all_course_tasks(1)
+    return render_template('user_courses.html', )#course_tasks=all_course_tasks)
 
 
 @main.route('/user/tasks')
 def user_tasks():
-    return render_template('user_tasks.html')
+    # all_task_targets = ld.get_all_task_targets(task_id=1)    
+    return render_template('user_tasks.html',)# all_task_targets=all_task_targets)
 
 
 @main.route('/admin/my_checkpoints')
@@ -54,16 +55,16 @@ def admin_checkpoints():
 #     return render_template('learner_dashboard.html', all_courses=all_courses)
 
 
-@main.route('/course/<int:course_id>')
-def ld_all_tasks(course_id):
-    all_course_tasks = ld.get_all_course_tasks(course_id)
-    return render_template('user_courses.html', course_tasks=all_course_tasks)
+# @main.route('/course/<int:course_id>')
+# def ld_all_tasks(course_id):
+#     all_course_tasks = ld.get_all_course_tasks(course_id)
+#     return render_template('user_courses.html', course_tasks=all_course_tasks)
 
 
 #@learner.route('/course/<int: course_id>/tasks/<int: task_id>')
-@main.route('/targets')
-def ld_all_targets():
-    all_task_targets = ld.get_all_task_targets(task_id)
-    target_form = TargetForm()
-    # return render_template('targets.html', task_targets=all_task_targets)
-    return render_template('user_tasks.html')
+# @main.route('/targets')
+# def ld_all_targets():
+#     all_task_targets = ld.get_all_task_targets(task_id)
+#     target_form = TargetForm()
+#     # return render_template('targets.html', task_targets=all_task_targets)
+#     return render_template('user_tasks.html')

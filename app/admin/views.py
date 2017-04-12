@@ -1,8 +1,8 @@
 from flask import render_template, flash, redirect, request, url_for
 from flask_login import login_required, login_user, logout_user, current_user
-from forms import CoursesForm, ResourcesForm
+from .forms import CoursesForm, TasksForm
 from . import admin
-from ..models import Course, Task
+from ..models import Course, Tasks
 from .. import db
 
 
@@ -21,7 +21,7 @@ def list_courses():
     courses = Course.query.all()
     if not courses:
         flash("No available course")
-    return render_template('user_courses.html', courses=courses)
+    return render_template('admin_dashboard.html', courses=courses)
 
 
 @admin.route("/courses/add", methods=['GET', 'POST'])
@@ -41,8 +41,8 @@ def add_course():
             # in case course name already exists
             flash('Error: course name already exists.')
         # redirect to courses page
-        return redirect(url_for('list_courses'))
-    return render_template('admin/add_course.html', form=form)
+        return redirect(url_for('main.admin_dashboard'))
+    return render_template('add_course.html', form=form)
 
 
 @admin.route('/courses/edit/<int:id>', methods=['GET', 'POST'])
@@ -61,7 +61,7 @@ def edit_course(id):
 
     form.description.data = course.description
     form.name.data = course.name
-    return render_template('admin/add_course.html', add_course=add_course, form=form)
+    return render_template('addcourse.html', add_course=add_course, form=form)
 
 
 @admin.route('/course/delete/<int:id>', methods=['GET', 'POST'])
@@ -69,6 +69,9 @@ def edit_course(id):
 def delete_course(id):
     """ Delete a course from the database """
     course = Course.query.get_or_404(id)
+    tasks = Tasks.query.filter_by(course_name=course.name).all()
+    for task in tasks:
+        db.session.delete(task)
     db.session.delete(course)
     db.session.commit()
     flash('You have successfully deleted the course.')
@@ -76,38 +79,27 @@ def delete_course(id):
     return redirect(url_for('list_courses'))
 
 
-@admin.route("/tasks/add", methods=['GET', 'POST'])
+@admin.route("/tasks/add/<int:id>", methods=['GET', 'POST'])
 @login_required
-def add_tasks():
+def add_tasks(id):
     """ Add task """
-    form = CoursesForm()
-    if form.validate_on_submit():
-        task = Tasks(task_name=form.name.data,
-                     task_description=form.description.data)
-        try:
-            db.session.add(task)
-            db.session.commit()
-            flash('You have successfully added a new task.')
-        except:
-            # in case course name already exists
-            flash('Error: task name already exists.')
-        # redirect to courses page
-        return redirect(url_for('list_courses'))
-    return render_template('admin/add_course.html', form=form)
-
-
-@admin.route('/add/resources', methods=['GET', 'POST'])
-@login_required
-def add_resource():
-    form = ResourcesForm()
-    if form.validate_on_submit():
-        resource = Course(resource=form.resource.data)
-        db.session.add(resource)
-        db.session.commit()
-        flash('You have successfully added a new resource.')
-        return redirect(url_for('list_courses'))
-    return render_template('admin/add_course.html', form=form)
-@admin.route('/user/my_checkpoints') 
-@login_required   
-def user_checkpoints():
-    return render_template('user_courses.html')
+    if request.method == "POST":
+        
+        form = TasksForm()
+        if form.validate_on_submit():
+            task = Tasks(task_name=form.TaskName.data,
+                        task_description=form.description.data, course_id=id)
+            try:
+                db.session.add(task)
+                db.session.commit()
+                flash('You have successfully added a new task.')
+            except:
+                # in case course name already exists
+                flash('Error: task name already exists.')
+            # redirect to courses page
+            return redirect(url_for('main.user_tasks'))
+        return render_template('add_course.html', form=form)
+    elif request.method == 'GET':
+        courses = Course.query.all()
+        tasks = Tasks.query.filter_by(course_id=id)
+        return render_template('user_courses.html', tasks=tasks,courses=courses)

@@ -1,0 +1,18 @@
+{% import "bootstrap/wtf.html" as wtf %}
+{% extends "base.html" %}
+{% block title %} Courses {% endblock %}
+
+{% block content %}
+<div class="content-section">
+ <div class="outer">
+    <div class="middle">
+      <div class="inner">
+        <div class="center">
+                <h1> add task </h1>
+        {{ wtf.quick_form(form) }}
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+{% endblock %}

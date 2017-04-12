@@ -40,29 +40,34 @@ class User(db.Model, UserMixin):
         return "<User '{}'>".format(self.username)
 
 
-class Course(db.Model):
-    __tablename__ = 'courses'
-    id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(200), unique=True)
-    description = db.Column(db.String(200), unique=False)
-    learners = db.relationship('User', lazy='dynamic')
-    tasks = db.relationship('Task', backref='course', lazy='dynamic')
-    #user_requests = db.relationship('User', foreign_keys=[user_id], backref='user')
 
-
-class Task(db.Model):
-    __tablename__ = 'tasks'
-    id = db.Column(db.Integer, primary_key=True)
-    task_name = db.Column(db.String(200), unique=True)
-    task_description = db.Column(db.String(200), unique=False)
-    course_id = db.Column(db.Integer, db.ForeignKey('courses.id'))
-    targets = db.relationship('Target', backref='task', lazy='dynamic')
-
-    # courses = db.relationship(
-    #     'Course', backref=db.backref('courses', lazy='dynamic'))
 
 class Target(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String)
     is_done = db.Column(db.Boolean)
-    task_id = db.Column(db.String, db.ForeignKey('tasks.id'))
+    task_name = db.Column(db.String(200), db.ForeignKey(
+        'tasks.task_name'), nullable=False)
+
+class Course(db.Model):
+    __tablename__ = 'courses'
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(200), unique=True)
+    description = db.Column(db.String(200), unique=False)
+    resource = db.Column(db.String(200), unique=False)
+#tasks = db.relationship(Tasks, backref='courses', lazy='dynamic')
+
+class Tasks(db.Model):
+    __tablename__ = 'tasks'
+    id = db.Column(db.Integer, primary_key=True)
+    task_name = db.Column(db.String(200), unique=True)
+    task_description = db.Column(db.String(200), unique=False)
+    target = db.relationship(Target, backref='tasks', lazy='dynamic')
+    course_id = db.Column(db.Integer, db.ForeignKey(
+        'courses.id'), nullable=False)
+    course = db.relationship(Course, backref='course', lazy='dynamic')
+
+
+
+
+

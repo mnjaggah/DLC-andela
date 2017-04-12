@@ -3,7 +3,7 @@
 My Dashboard | Welcome
 {% endblock %}
 {% block content %}
-
+{% for target in all_task_targets %}
 
                     <div id="card-widgets">
                         <div class="row">
@@ -16,28 +16,11 @@ My Dashboard | Welcome
                                     </li>
                                     <li class="collection-item dismissable">
                                         <input type="checkbox" id="task1">
-                                        <label for="task1">Create Git Hub Repo <a href="#" class="secondary-content"></a>
+                                        <label for="task1">{{target.name}} <a href="#" class="secondary-content"></a>
                                         </label>
                                         
                                     </li>
-                                    <li class="collection-item dismissable">
-                                        <input type="checkbox" id="task2">
-                                        <label for="task2">write Unittests for Task one <a href="#" class="secondary-content"></a>
-                                        </label>
-                                        
-                                    </li>
-                                    <li class="collection-item dismissable">
-                                        <input type="checkbox" id="task3" checked="checked">
-                                        <label for="task3">Write Functions For function one <a href="#" class="secondary-content"></a>
-                                        </label>
-                                       
-                                    </li>
-                                    <li class="collection-item dismissable">
-                                        <input type="checkbox" id="task4" checked="checked" disabled="disabled">
-                                        <label for="task4">Request PR Review!</label>
-                                        
-                                    </li>
-                                </ul>
+                                {% endfor %}
                             </div>
 
 
