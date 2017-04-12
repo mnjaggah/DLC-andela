@@ -92,24 +92,6 @@ def post_forum_question():
     return render_template('post_question.html', form=form)
 
 
-@app.route('/post_answer', methods=('GET', 'POST'))
-@login_required
-def post_answer():
-    form = PostAnswerForm()
-    if form.validate_on_submit():
-        pass
-    return render_template('post_question.html')
-
-
-@app.route('/post_reply', methods=('GET', 'POST'))
-@login_required
-def post_reply():
-    form = PostReplyForm()
-    if form.validate_on_submit():
-        pass
-    return render_template('post_question.html')
-
-
 @app.route('/list_forum_questions')
 @login_required
 def list_forum_questions():
@@ -131,7 +113,7 @@ def question_thread(question_id=None):
         db.session.add(answer)
         db.session.commit()
         flash("Awesome. You have posted an answer")
-
+        return redirect(url_for('question_thread', question_id=question_number))
     reply_form = PostReplyForm()
     if reply_form.validate_on_submit():
         reply = ForumAnswerReply(reply_text=reply_form.comment.data,
@@ -142,5 +124,6 @@ def question_thread(question_id=None):
         db.session.add(reply)
         db.session.commit()
         flash("Awesome. You have commented on an answer")
+        return redirect(url_for('question_thread', question_id=question_number))
     return render_template('forum_question_thread.html', my_question=my_question, reply_form=reply_form,
                            answer_form=answer_form, answer_stream=answer_stream, reply_stream=reply_stream)

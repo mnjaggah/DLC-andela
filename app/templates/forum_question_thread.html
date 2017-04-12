@@ -57,44 +57,11 @@ Forums | Ask A question
 					</div>
 				</div>
 				<!-- reply list -->
-				{% if reply_stream|length == 0 %}
-                  <ul class="comments-list reply-list">
-					  <div class="row">
-						  <button type="button" class="show-hide-form">add a comment</button>
-					  </div>
 
-					  <div class="row nested-replies-form">
-
-							<div class="col-md-6">
-								<div class="widget-area no-padding blank">
-									<div class="status-upload">
-										<form method="post" action="">
-											<div class="field">
-												{% if reply_form.answer_id.errors %}
-													{% for error in reply_form.answer_id.errors %}
-														<div class="notification_error">
-															{{ error }}
-														</div>
-													{% endfor %}
-												{% endif %}
-											</div>
-
-											{{ reply_form.hidden_tag() }}
-											{{ reply_form.answer_id(value= answer.id , readonly=true, style="display:none;") }}
-											{{ reply_form.question_id(value= my_question.id, readonly=true, style="display:none;") }}
-											{{ reply_form.comment(placeholder="what do you think?", id_='answer-upload textarea') }}
-											<button type="submit" class="btn btn-success green"><i class="fa fa-share"></i> Share</button>
-										</form>
-									</div><!-- Status Upload  -->
-								</div><!-- Widget Area -->
-							</div>
-					  </div>
-				  </ul>
-                {% else%}
+				<ul class="comments-list reply-list">
 					{% for reply in reply_stream %}
 						{% if reply.reply_answer_id == answer.id %}
-							<ul class="comments-list reply-list">
-								<li>
+							<li>
 									<!-- Avatar -->
 									<div class="comment-avatar"><img src="http://i9.photobucket.com/albums/a88/creaticode/avatar_2_zps7de12f8b.jpg" alt=""></div>
 									<!-- reply-->
@@ -107,75 +74,42 @@ Forums | Ask A question
 											{{ reply.reply_text}}
 										</div>
 									</div>
-								</li>
+							</li>
 
-								<div class="row">
-									<button type="button" class="show-hide-form">add a comment</button>
-								</div>
 
-								<div class="row nested-replies-form">
-
-								<div class="col-md-6">
-									<div class="widget-area no-padding blank">
-										<div class="status-upload">
-											<form method="post" action="">
-												<div class="field">
-													{% if reply_form.answer_id.errors %}
-														{% for error in reply_form.answer_id.errors %}
-															<div class="notification_error">
-																{{ error }}
-															</div>
-														{% endfor %}
-													{% endif %}
-												</div>
-
-												{{ reply_form.hidden_tag() }}
-												{{ reply_form.answer_id(value=" answer.id ", readonly=true, style="display:none;") }}
-												{{ reply_form.question_id(value=" my_question.id ", readonly=true, style="display:none;") }}
-												{{ reply_form.comment(placeholder="what do you think?", id_='answer-upload textarea') }}
-												<button type="submit" class="btn btn-success green"><i class="fa fa-share"></i> Share</button>
-											</form>
-										</div><!-- Status Upload  -->
-									</div><!-- Widget Area -->
-								</div>
-								</div>
-							</ul>
-						{% else %}
-							<ul class="comments-list reply-list">
-					  			<div class="row">
-									<button type="button" class="show-hide-form">add a comment</button>
-								</div>
-
-								<div class="row nested-replies-form">
-
-									<div class="col-md-6">
-										<div class="widget-area no-padding blank">
-											<div class="status-upload">
-												<form method="post" action="">
-													<div class="field">
-														{% if reply_form.answer_id.errors %}
-															{% for error in reply_form.answer_id.errors %}
-																<div class="notification_error">
-																	{{ error }}
-																</div>
-															{% endfor %}
-														{% endif %}
-													</div>
-
-													{{ reply_form.hidden_tag() }}
-													{{ reply_form.answer_id(value= answer.id , readonly=true, style="display:none;") }}
-													{{ reply_form.question_id(value= my_question.id, readonly=true, style="display:none;") }}
-													{{ reply_form.comment(placeholder="what do you think?", id_='answer-upload textarea') }}
-													<button type="submit" class="btn btn-success green"><i class="fa fa-share"></i> Share</button>
-												</form>
-											</div><!-- Status Upload  -->
-										</div><!-- Widget Area -->
-									</div>
-								</div>
-				  			</ul>
 						{% endif %}
 					{% endfor %}
-				{% endif %}
+					<div class="row">
+							  <button type="button" class="show-hide-form">add a comment</button>
+					</div>
+
+					<div class="row nested-replies-form">
+
+					  <div class="col-md-6">
+						<div class="widget-area no-padding blank">
+						  <div class="status-upload">
+							<form method="post" action="">
+							  <div class="field">
+								{% if reply_form.answer_id.errors %}
+								  {% for error in reply_form.answer_id.errors %}
+									<div class="notification_error">
+									  {{ error }}
+									</div>
+								  {% endfor %}
+								{% endif %}
+							  </div>
+
+							  {{ reply_form.hidden_tag() }}
+							  {{ reply_form.answer_id(value= answer.id , readonly=true, style="display:none;") }}
+							  {{ reply_form.question_id(value= my_question.id, readonly=true, style="display:none;") }}
+							  {{ reply_form.comment(placeholder="what do you think?", id_='answer-upload textarea') }}
+							  <button type="submit" class="btn btn-success green"><i class="fa fa-share"></i> Share</button>
+							</form>
+						  </div><!-- Status Upload  -->
+						</div><!-- Widget Area -->
+					  </div>
+					</div>
+				</ul>
 			</li>
 		</ul>
 		{% endfor %}
