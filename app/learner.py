@@ -1,4 +1,4 @@
-from .models import User, Learner, Course, Task, Target
+from .models import User, Course, Task, Target
 
 
 class LearnerDashboard:
@@ -19,7 +19,7 @@ class LearnerDashboard:
 
     @staticmethod
     def select_course(user_id, course_id):
-        learner = Learner.query.get(user_id)
+        learner = User.query.get(user_id)
         current_course = learner.course_id
         if not current_course:
             learner.course_id = course_id
@@ -52,18 +52,41 @@ class LearnerDashboard:
                 'Tasks': tasks}
 
     def get_current_course(self, user_id):
-        learner = Learner.query.get(user_id)
+        learner = User.query.get(user_id)
         course_id = learner.course_id
         return self.get_course_info(course_id)
 
     def get_previous_courses(self, user_id):
-        learner = Learner.query.get(user_id)
+        learner = User.query.get(user_id)
         previous_courses = learner.previous_courses
         all_previous = []
         for course_id in previous_courses:
             course_info = self.get_course_info(course_id)
             all_previous.append(course_info)
         return all_previous
+
+    @staticmethod
+    def get_all_courses():
+        # from app.models import dummy_course, dummy_course2
+        # dummy_course()
+        # dummy_course2()
+        all_courses = Course.query.all()
+        return all_courses
+
+    @staticmethod
+    def get_all_course_tasks(course_id):
+        all_tasks = Task.query.filter_by(course_id=course_id)
+        return all_tasks
+
+    @staticmethod
+    def get_all_task_targets(task_id):
+        all_targets = Target.query.filter_by(task_id=task_id)
+        return all_targets
+
+
+
+
+
 
 
 
