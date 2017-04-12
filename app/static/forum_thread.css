@@ -345,8 +345,8 @@
 	padding-left: 7%;
 }
 
-select {
-    display: block !important;
+#categories {
+    display: block; !important
 }
 
 
