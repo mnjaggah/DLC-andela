@@ -39,7 +39,7 @@ class SignupForm(Form):
 
 
 
-class FacilitatorsForm(Form):
+class AddFacilitatorsForm(Form):
     """Form to add facilitators to system"""
 
     first_name = StringField('First Name', validators=[DataRequired()])
@@ -48,6 +48,9 @@ class FacilitatorsForm(Form):
     submit = SubmitField('Save')
     
 
+class FacilitatorLoginForm(Form):
 
+    email = StringField('Email', validators=[DataRequired(), Email()])
+    submit = SubmitField('Login')
 
 
