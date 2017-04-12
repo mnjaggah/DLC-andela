@@ -86,21 +86,21 @@
                                 {% endif %}
                             </div>
                         </li>
-                        <li><a class="subheader">Get Started</a></li>
+                        <li><a class="waves-effect" class="subheader">Get Started</a></li>
                         {% if current_user.is_learner%}
-                        <li><a href="{{url_for('main.dashboard')}}"><i class="material-icons left">school</i>Check Points</a></li>
+                        <li><a class="waves-effect" href="{{url_for('main.dashboard')}}"><i class="material-icons left">school</i>Courses</a></li>
                         {%else%}
-                        <li><a href="{{url_for('main.user_tasks')}}"><i class="material-icons left">dashboard</i>Dashboard</a></li>
+                        <li><a class="waves-effect"href="#"><i class="material-icons left">dashboard</i>Dashboard</a></li>
                         {% endif %}
                         {% if current_user.is_learner%}
-                        <li><a href="{{url_for('main.user_tasks')}}"><i class="material-icons left">flash_on</i>Current</a></li>
+                        <li><a class="waves-effect"href="{{url_for('main.user_tasks')}}"><i class="material-icons left">flash_on</i>Current</a></li>
                         {%else%}
-                        <li><a href="{{url_for('main.user_tasks')}}"><i class="material-icons left">school</i>Courses</a></li>
+                        <li><a class="waves-effect"href="#"><i class="material-icons left">bubble_chart</i>Learners</a></li>
                         {% endif %}
                         {% if current_user.is_learner%}                        
-                        <li><a href="{{url_for('main.user')}}"><i class="material-icons left">account_circle</i>Profile</a></li>
+                        <li><a class="waves-effect" href="{{url_for('main.user')}}"><i class="material-icons left">account_circle</i>Profile</a></li>
                         {%else%}
-                        <li><a href="#"><i class="material-icons left">people</i>Facilitators</a></li>
+                        <li><a class="waves-effect"href="#"><i class="material-icons left">people</i>Facilitators</a></li>
                         {% endif %}
                         <li><a href="#"><i class="material-icons left">forum</i>Forum</a></li>
                         <li><a href="#"><i class="material-icons left">notifications</i>Notifications</a></li>

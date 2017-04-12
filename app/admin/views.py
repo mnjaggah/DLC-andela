@@ -110,4 +110,4 @@ def add_resource():
 @admin.route('/user/my_checkpoints') 
 @login_required   
 def user_checkpoints():
-    return render_template('admin/user_courses.html')
+    return render_template('user_courses.html')

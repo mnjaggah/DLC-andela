@@ -4,7 +4,40 @@ My Dashboard | Welcome
 {% endblock %}
 {% block content %}
 
+                    <div id="card-widgets">
+                        <div class="row">
 
+                            <div class="col s12 m12 l4">
+                                <ul id="task-card" class="collection with-header">
+                                    <li class="collection-header indigo">
+                                        <h5 class="task-card-title">Chekpoint One Tasks</h5>
+                                        <p class="task-card-date">Amity</p>
+                                    </li>
+                                    <li class="collection-item dismissable">
+                                        <input type="checkbox" id="task1">
+                                        <label for="task1">Create Git Hub Repo <a href="#" class="secondary-content"></a>
+                                        </label>
+                                        
+                                    </li>
+                                    <li class="collection-item dismissable">
+                                        <input type="checkbox" id="task2">
+                                        <label for="task2">write Unittests for Task one <a href="#" class="secondary-content"></a>
+                                        </label>
+                                        
+                                    </li>
+                                    <li class="collection-item dismissable">
+                                        <input type="checkbox" id="task3" checked="checked">
+                                        <label for="task3">Write Functions For function one <a href="#" class="secondary-content"></a>
+                                        </label>
+                                       
+                                    </li>
+                                    <li class="collection-item dismissable">
+                                        <input type="checkbox" id="task4" checked="checked" disabled="disabled">
+                                        <label for="task4">Request PR Review!</label>
+                                        
+                                    </li>
+                                </ul>
+                            </div>
 
 
 

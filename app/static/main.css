@@ -11,7 +11,6 @@ nav {
     height: 56px;
     line-height: 56px;
 }
-
 .preloader-background {
     display: flex;
     align-items: center;
@@ -46,3 +45,22 @@ nav {
     margin-bottom: 1em;
 }
 
+.tabs .tab a {
+    color: #009688 !important;
+}
+.tabs .tab a {
+    color: #009688 !important;
+}
+.tabs .indicator {
+    position: absolute;
+    bottom: 0;
+    height: 2px;
+    background-color: #3F51B5 !important;
+    will-change: left, right;
+}
+.tabs .indicator {
+    position: absolute;
+    bottom: 0;
+    height: 2px;
+    background-color: #3F51B5 !important;
+}

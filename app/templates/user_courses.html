@@ -1,0 +1,135 @@
+{% extends "base.html" %}
+{% block title %}
+My Dashboard | Welcome
+{% endblock %}
+{% block content %}
+
+<body class="white">
+  <div class="row">
+    <div class="col s12">
+      <ul class="tabs .tabs-fixed-width">
+        <li class="tab col s3"><a href="#test1">Checkpoints</a></li>
+        <li class="tab col s3"><a href="#test2">Resources</a></li>
+        <li class="tab col s3"><a href="#test3">Trello</a></li>
+      </ul>
+    </div>
+    <div id="test1" class="col s12">
+                      <h4>Checkpoint one</h4>
+
+      <table class="striped">
+        <thead>
+          <tr>
+              <th>Name</th>
+              <th>See summary</th>
+              <th>Progress</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr>
+            <td>Amity</td>
+            {% if current_user.is_learner%}
+            <td><i class="material-icons left">view_headline</i>
+            <a class="modal-trigger" href="#modal1">View</a>
+
+            <!-- Modal Structure -->
+            <div id="modal1" class="modal modal-fixed-footer">
+              <div class="modal-content">
+                <h4>CP 1 - Office Space Allocation</h4>
+                <p>Requirements
+To complete this application you’ll need to know Programming Basics, Data Structures,
+Object-Oriented Programming (OOP) and Test Driven Development (TDD) in Python.
+You are advised to consult the learning resources shared with you, other cool resources you find
+online and your learning community to level up on these concepts.
+Problem Description
+When a new Fellow joins Andela they are assigned an office space and an optional living space if
+they choose to opt in. When a new Staff joins they are assigned an office space only. In this
+exercise you will be required to digitize and randomize a room allocation system for one of
+Andela Kenya’s facilities called The Dojo.</p>
+              </div>
+              <div class="modal-footer">
+                <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat ">See full Description here</a>
+              </div>
+            </div>
+            </td>
+            {%else%}
+            <td><i class="material-icons left">edit</i>Edit</td>
+            {% endif %}
+            {% if current_user.is_learner%}
+            <td><i class="material-icons left">done</i>100% Finished</td>
+            {%else%}
+            <td><i class="material-icons left">delete</i>Delete</td>
+            {% endif %}
+
+
+          </tr>
+          <tr>
+            <td>Class Attendance Register</td>
+            {% if current_user.is_learner%}
+            <td><i class="material-icons left">view_headline</i>View</td>
+            {%else%}
+            <td><i class="material-icons left">edit</i>Edit</td>
+            {% endif %}
+            {% if current_user.is_learner%}
+            <td><i class="material-icons left">trending_up</i>50% Resume</td>
+            {%else%}
+            <td><i class="material-icons left">delete</i>Delete</td>
+            {% endif %}
+
+
+          </tr>
+          <tr>
+            <td>Note taking application</td>
+            {% if current_user.is_learner%}
+            <td><i class="material-icons left">view_headline</i>View</td>
+            {%else%}
+            <td><i class="material-icons left">edit</i>Edit</td>
+            {% endif %}
+            {% if current_user.is_learner%}
+            <td><i class="material-icons left">trending_up</i>0% Start</td>
+            {%else%}
+            <td><i class="material-icons left">delete</i>Delete</td>
+            {% endif %}
+
+
+          </tr>
+        </tbody>
+      </table>
+
+                    
+        </div>
+    <div id="test2" class="col s12">
+                             <p>Here are some learnig resources for check point 1</p>
+                      <ol>
+                        <li>Docopot link</li>
+                        <li>Python 2.</li>
+                        <li>Pep 8</li>
+                         <li>Oop</li>
+                         <li>Oop</li>
+
+                      </ol>
+                                                   <p>Here are some learnig resources for check point 2:</p>
+                      <ol>
+                        <li>Flask link</li>
+                        <li>SQl alchemy.</li>
+                        <li>demo scotch</li>
+                         <li>Oop</li>
+                         <li>Oop</li>
+
+                      </ol>
+                                                   <p>Here are some learnig resources for check point 3:</p>
+                      <ol>
+                        <li>Djsngo link</li>
+                        <li>Firebase.</li>
+                        <li>Pep 8</li>
+                         <li>Oop</li>
+                         <li>Oop</li>
+
+                      </ol>
+        </div>
+    <div id="test3" class="col s12">Test 3</div>
+  </div>
+
+
+
+{% endblock %}

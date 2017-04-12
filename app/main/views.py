@@ -28,8 +28,14 @@ def user():
     return render_template('user_profile.html')
 @main.route('/user/my_checkpoints')    
 def user_checkpoints():
-    return render_template('my_checkpoint.html')
+    return render_template('user_courses.html')
 
 @main.route('/user/tasks')    
 def user_tasks():
     return render_template('user_tasks.html')  
+
+@main.route('/admin/my_checkpoints') 
+@login_required   
+def admin_checkpoints():
+    return render_template('user_courses.html') 
+           
