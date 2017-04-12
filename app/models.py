@@ -18,7 +18,6 @@ class User(db.Model, UserMixin):
     is_admin = db.Column(db.Boolean, default=False)
     course_id = db.Column(db.Integer, db.ForeignKey('course.id'))
     task_id = db.Column(db.Integer, db.ForeignKey('task.id'))
-    #facilitator_id = db.Column(db.Integer, db.ForeignKey('facilitator.id'))
     is_learner = db.Column(db.Boolean, default=True)
     facilitator = db.Column(db.String(120), db.ForeignKey('facilitator.email'))
     my_courses = db.Column(db.PickleType)
