@@ -6,7 +6,7 @@ My Dashboard | Welcome
 
 {% block fab %}
 {% endblock %}
-{ % for course in courses %}
+{% for task in tasks %}
 <body class="white">
   <div class="row">
     <div class="col s12">
@@ -31,7 +31,7 @@ My Dashboard | Welcome
         <tbody>
           <tr>
             <td>{{task.task_name|capitalize}} {{task.task_description}}</td>
-            <!--{% if current_user.is_learner%}-->
+          
             <td><i class="material-icons left">view_headline</i>
             <a class="modal-trigger" href="#modal1">View</a>
 
@@ -83,15 +83,13 @@ My Dashboard | Welcome
         </div>
     <div id="test3" class="col s12">Test 3</div>
   </div>
-  
-
-                <div class="fixed-action-btn">
+  {%endfor%}
+   <div class="fixed-action-btn">
                     <a class="btn-floating btn-large dark blue">
                         <i class="large material-icons">add</i>
                     </a>
                     <ul>
-                        <li><a class="btn-floating red" href="{{url_for('admin.add_tasks', id=course.id)}}"><i class="material-icons">insert_chart</i></a></li>
+                        <li><a class="btn-floating red" href="{{url_for('admin.add_tasks', id=course_id,course_id=course_id)}}"><i class="material-icons">insert_chart</i></a></li>
                     </ul>
                 </div>
-  {%endfor%}
 {% endblock %}

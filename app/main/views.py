@@ -40,7 +40,7 @@ def user_checkpoints():
 @main.route('/user/tasks')
 def user_tasks():
     # all_task_targets = ld.get_all_task_targets(task_id=1)    
-    return render_template('user_tasks.html',)# all_task_targets=all_task_targets)
+    return render_template('user_courses.html',)# all_task_targets=all_task_targets)
 
 
 @main.route('/admin/my_checkpoints')

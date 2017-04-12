@@ -100,6 +100,10 @@ def add_tasks(id):
             return redirect(url_for('main.user_tasks'))
         return render_template('add_course.html', form=form)
     elif request.method == 'GET':
-        courses = Course.query.all()
-        tasks = Tasks.query.filter_by(course_id=id)
-        return render_template('user_courses.html', tasks=tasks,courses=courses)
+        course_id = request.args.get('course_id');
+        if not course_id:
+            # courses = Course.query.all()
+            tasks = Tasks.query.filter_by(course_id=id)
+            return render_template('user_courses.html', tasks=tasks,course_id=id)
+        form = TasksForm()
+        return render_template('add_task.html', course_id=id, form=form)

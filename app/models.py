@@ -49,13 +49,6 @@ class Target(db.Model):
     task_name = db.Column(db.String(200), db.ForeignKey(
         'tasks.task_name'), nullable=False)
 
-class Course(db.Model):
-    __tablename__ = 'courses'
-    id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(200), unique=True)
-    description = db.Column(db.String(200), unique=False)
-    resource = db.Column(db.String(200), unique=False)
-#tasks = db.relationship(Tasks, backref='courses', lazy='dynamic')
 
 class Tasks(db.Model):
     __tablename__ = 'tasks'
@@ -65,7 +58,15 @@ class Tasks(db.Model):
     target = db.relationship(Target, backref='tasks', lazy='dynamic')
     course_id = db.Column(db.Integer, db.ForeignKey(
         'courses.id'), nullable=False)
-    course = db.relationship(Course, backref='course', lazy='dynamic')
+    # course = db.relationship(Course, backref='course', lazy='dynamic')
+
+class Course(db.Model):
+    __tablename__ = 'courses'
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(200), unique=True)
+    description = db.Column(db.String(200), unique=False)
+    resource = db.Column(db.String(200), unique=False)
+    tasks = db.relationship(Tasks, backref='course', lazy='dynamic')
 
 
 
