@@ -119,6 +119,9 @@ def edit_course(id):
 def delete_course(id):
     """ Delete a course from the database """
     course = Course.query.get_or_404(id)
+    tasks = Tasks.query.filter_by(course_name=course.name).all()
+    for task in tasks:
+        db.session.delete(task)
     db.session.delete(course)
     db.session.commit()
     flash('You have successfully deleted the course.')
