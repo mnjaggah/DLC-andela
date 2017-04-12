@@ -17,6 +17,9 @@ class User(db.Model, UserMixin):
     password_hash = db.Column(db.String)
     is_admin = db.Column(db.Boolean, default=False)
     is_learner = db.Column(db.Boolean, default=True)
+    course_id = db.Column(db.Integer, db.ForeignKey('courses.id'))
+    task_id = db.Column(db.Integer, db.ForeignKey('tasks.id'))
+    my_courses = db.Column(db.PickleType)
 
     @property
     def password(self):
@@ -42,16 +45,24 @@ class Course(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(200), unique=True)
     description = db.Column(db.String(200), unique=False)
-    resource = db.Column(db.String(200), unique=False)
+    learners = db.relationship('User', lazy='dynamic')
+    tasks = db.relationship('Task', backref='course', lazy='dynamic')
     #user_requests = db.relationship('User', foreign_keys=[user_id], backref='user')
 
 
-class Tasks(db.Model):
+class Task(db.Model):
     __tablename__ = 'tasks'
     id = db.Column(db.Integer, primary_key=True)
     task_name = db.Column(db.String(200), unique=True)
     task_description = db.Column(db.String(200), unique=False)
     course_id = db.Column(db.Integer, db.ForeignKey('courses.id'))
+    targets = db.relationship('Target', backref='task', lazy='dynamic')
 
-    courses = db.relationship(
-        'Course', backref=db.backref('courses', lazy='dynamic'))
+    # courses = db.relationship(
+    #     'Course', backref=db.backref('courses', lazy='dynamic'))
+
+class Target(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String)
+    is_done = db.Column(db.Boolean)
+    task_id = db.Column(db.String, db.ForeignKey('tasks.id'))

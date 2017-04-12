@@ -2,7 +2,7 @@ from flask import render_template, flash, redirect, request, url_for
 from flask_login import login_required, login_user, logout_user, current_user
 from forms import CoursesForm, ResourcesForm
 from . import admin
-from ..models import Course, Tasks
+from ..models import Course, Task
 from .. import db
 
 
