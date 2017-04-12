@@ -1,11 +1,10 @@
-import os
 import random
 
 from flask import Flask, render_template, url_for, request, redirect, url_for, flash, abort
 from flask_login import login_required, login_user, logout_user, current_user
 from app import app, db, login_manager
 from .forms import SigninForm, SignupForm, AddFacilitatorsForm, FacilitatorLoginForm
-from .models import User, Facilitator, FacilitatorAllocations
+from .models import User, Facilitator
 
 
 def check_admin():
@@ -56,6 +55,7 @@ def signup():
         user = User(email=form.email.data,
                     username=form.username.data,
                     password=form.password.data,
+                    facilitator=get_facilitator()
                     )
         db.session.add(user)
         db.session.commit()
@@ -80,12 +80,13 @@ def login():
 
 @app.route('/facilitator_login', methods=['GET','POST'])
 def facilitator_login():
-    form = FacilitatorLoginForm()
+    form = FacilitatorLoginForm() 
     if form.validate_on_submit():
         facilitator = Facilitator.query.filter_by(email=form.email.data).first()
-        if facilitator is not None:
+        if facilitator :
             login_user(facilitator)
-            return redirect(url_for('facilitator_dashboard'))
+            #return render_template('dashboard.html')
+            return redirect(url_for('view_allocated_learners'))
 
     return render_template ('facilitator_login.html', form=form)
 
@@ -141,42 +142,21 @@ def view_facilitators():
         )
 
 
-
-@app.route('/allocate_facilitators', methods=['GET','POST'])
-@login_required
-def allocate_facilitator():
-    """ 
-    Method to allocate a facilitator to a learner randomly
-    """
-    facilitator_email = get_facilitator()
-
-    allocation = FacilitatorAllocations(
-        learners_username=current_user.username,
-        facilitator_email=facilitator_email
-        )
-    db.session.add(allocation)
-    db.session.commit()
-    flash('Facilitator successfully assigned')
-    return redirect(url_for('index'))
-
-
-
-@app.route('/facilitators/dashboard', methods=['GET','POST'])
+@app.route('/facilitator/dashboard', methods=['GET','POST'])
 @login_required
 def facilitator_dashboard():
     return render_template('facilitators_dashboard.html', title="Dashboard")
 
 
 
-@app.route('/facilitator/dashboard/all_learners', methods=['GET','POST'])
+@app.route('/facilitator/all_learners', methods=['GET','POST'])
 @login_required
 def view_allocated_learners():
     """
     This function lists all learners allocated
     to a facilitator
     """
+    my_learners = User.query.filter_by(facilitator='maz@andela.com').all()
 
-    my_learners = FacilitatorAllocations.query.filter_by(facilitator_email=current_user.email).first()
-
-    return render_template('/facilitators_dashboard.html', my_learners=my_learners)
+    return render_template('my_learners.html', my_learners=my_learners)
 

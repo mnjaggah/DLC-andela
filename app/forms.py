@@ -17,7 +17,7 @@ class SigninForm(Form):
 
 
 class SignupForm(Form):
-    
+      
     email = StringField('Email', validators=[DataRequired(), Length(1, 64),
                                            Email()])
     username = StringField('Username', validators=[
@@ -38,9 +38,10 @@ class SignupForm(Form):
 
 
 
-
 class AddFacilitatorsForm(Form):
-    """Form to add facilitators to system"""
+    """
+    Form to add facilitators to system
+    """
 
     first_name = StringField('First Name', validators=[DataRequired()])
     last_name = StringField('Last Name', validators=[DataRequired()])
@@ -52,5 +53,7 @@ class FacilitatorLoginForm(Form):
 
     email = StringField('Email', validators=[DataRequired(), Email()])
     submit = SubmitField('Login')
+
+
 
 

@@ -13,7 +13,7 @@ class User(db.Model, UserMixin):
     password_hash = db.Column(db.String)
     is_admin = db.Column(db.Boolean, default=False)
     is_learner = db.Column(db.Boolean, default=True)
-    facilitator = db.Column(db.String)
+    facilitator = db.Column(db.String(120), db.ForeignKey('facilitators.email'))
     
 
     @property
@@ -45,9 +45,4 @@ class Facilitator(db.Model, UserMixin):
     first_name = db.Column(db.String(64), unique=False)
     last_name = db.Column(db.String(64), unique=False)
     email = db.Column(db.String(120), unique=True)
-
-class FacilitatorAllocations(db.Model):
-    __tablename__ = 'facilitator_allocations'
-    id = db.Column(db.Integer, primary_key=True)
-    learners_username = db.Column(db.String(80),unique=True)
-    facilitator_email = db.Column(db.String(80))
+    learner = db.relationship('User', backref='facilitators', lazy='dynamic')
