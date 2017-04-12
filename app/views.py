@@ -81,7 +81,7 @@ def add_course():
     form = CoursesForm()
     if form.validate_on_submit():
         course = Course(name=form.name.data,
-                        description=form.description.data)
+                        description=form.description.data, resource=form.url.data)
         try:
             db.session.add(course)
             db.session.commit()
@@ -104,6 +104,7 @@ def edit_course(id):
     if form.validate_on_submit():
         course.name = form.name.data
         course.description = form.description.data
+        course.resource = form.url.data
         db.session.commit()
         flash('You have successfully edited the course.')
         return redirect(url_for('list_courses'))
@@ -125,14 +126,14 @@ def delete_course(id):
     return redirect(url_for('list_courses'))
 
 
-@app.route("/tasks/add", methods=['GET', 'POST'])
+@app.route("/tasks/add/<name>", methods=['GET', 'POST'])
 @login_required
-def add_tasks():
+def add_tasks(name):
     """ Add task """
     form = TasksForm()
     if form.validate_on_submit():
         task = Tasks(task_name=form.TaskName.data,
-                     task_description=form.description.data)
+                     task_description=form.description.data, course_name=name)
         try:
             db.session.add(task)
             db.session.commit()

@@ -30,7 +30,7 @@
                 <tr>
                   <td>{{ course.name }}</td>
                   <td>{{ course.description }}</td>
-                  <td> {{ course.url }}</td>
+                  <td> {{ course.resource }} </td>
                   <td> <a href="{{ url_for('edit_course', id=course.id) }}"> <i class="fa fa-pencil"></i> Edit
                     </a>
                   </td>
@@ -39,7 +39,7 @@
                     </a>
                   </td>
                   <td>
-                    <a href="{{ url_for('add_tasks') }}"> <i class="fa fa-plus"></i> Add tasks
+                    <a href="{{ url_for('add_tasks', name=course.name) }}"> <i class="fa fa-plus"></i> Add tasks
                     </a>
                   </td>
                 </tr>
