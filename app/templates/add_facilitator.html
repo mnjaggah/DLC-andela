@@ -6,36 +6,37 @@
 <div class="container">
 <div class="row">
   
-    <div class="col s12 m12 ">
+    <div class="col s12 m12 l8 offset-l2">
       <form method="post" class="form"  role="form">
         {{ form.hidden_tag() }}
 <div class="row">
   <div class="input-field col s12 center">
     <h5>
-      <p class="center login-form-text">Add a course</p>
+      <p class="center login-form-text">Add a Facilitator</p>
     </h5>
   </div>
 </div>
 <div class="row margin">
   <div class="input-field col s12">
-    <i class="material-icons t prefix">school</i>
+    <i class="material-icons t prefix">account_circle</i>
     <input type="text" class="validate" id="first_name" name="first_name">
     <label for="first_name">First Name</label>
   </div>
   <div class="row margin">
     <div class="input-field col s12">
-      <i class="material-icons prefix">last_name</i>
+      <i class="material-icons prefix">account_circle</i>
       <input type="text" class="validate" id="last_name" name="last_name">
       <label for="last_name">Last name</label>
     </div>
 <div class="row margin">
-    <div class="input-field col s12">
+    <div class="input-field col s12 ">
+        <i class="material-icons prefix">email</i>
         <input type="email" class="validate" id="email" name="email">
         <label for="email">Email</label>
     </div>
         </div>
     <div class="row">
-      <div class="input-field col s12">
+       <div class="input-field col s12 l8 offset-l3">
         <button class="btn waves-effect waves-light" type="submit" name="action">Submit
     <i class="material-icons right">send</i>
   </button>

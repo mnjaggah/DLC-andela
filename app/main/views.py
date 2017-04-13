@@ -141,13 +141,12 @@ def facilitator_login():
     return render_template('facilitator_login.html', form=form)
 
 
-@main.route('/facilitators/add', methods=['GET', 'POST'])
+@main.route('/admin/add_facilitator', methods=['GET', 'POST'])
 @login_required
 def add_facilitator():
     """
     Functionality to add facilitators to the system
     """
-    check_admin()
 
     form = AddFacilitatorsForm()
     if form.validate_on_submit():

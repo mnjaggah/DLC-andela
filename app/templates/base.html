@@ -91,7 +91,7 @@
                         {% elif current_user.is_facilitator %}
                         <li><a class="waves-effect"href="{{url_for('main.get_learner')}}"><i class="material-icons left">bubble_chart</i>My Learners</a></li>
                         {%else%}
-                        <li><a class="waves-effect"href="#"><i class="material-icons left">dashboard</i>Dashboard</a></li>
+                        <li><a class="waves-effect"href="{{url_for('main.admin_dashboard')}}"><i class="material-icons left">dashboard</i>Dashboard</a></li>
                         {% endif %}
                         {% if current_user.is_learner%}
                         <li><a class="waves-effect"href="#"><i class="material-icons left">flash_on</i>Current</a></li>
@@ -101,12 +101,12 @@
                         <li><a class="waves-effect"href="{{url_for('main.get_learner')}}"><i class="material-icons left">bubble_chart</i>Learners</a></li>
                         {% endif %}
                         
-                        {% if current_user.is_learner%}   
-                        {% if current_user.is_facilitator%}                     
+                        {% if current_user.is_learner%}                       
                         <li><a class="waves-effect" href="#"><i class="material-icons left">account_circle</i>Profile</a></li>
+                        {% elif current_user.is_facilitator%}
+                         <li><a class="waves-effect" href="#"><i class="material-icons left">account_circle</i>Profile</a></li>
                         {%else%}
-                        <li><a class="waves-effect"href="#"><i class="material-icons left">people</i>Facilitators</a></li>
-                        {% endif %}
+                        <li><a class="waves-effect"href="{{url_for('main.add_facilitator')}}"><i class="material-icons left">people</i>Add Facilitators</a></li>
                         {% endif %}
                         <li><a href="#"><i class="material-icons left">forum</i>Forum</a></li>
                         <li><a href="#"><i class="material-icons left">notifications</i>Notifications</a></li>
