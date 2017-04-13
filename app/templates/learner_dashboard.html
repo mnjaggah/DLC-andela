@@ -3,7 +3,10 @@
 My Dashboard | Welcome
 {% endblock %}
 {% block content %}
-{% for course in all_courses %}
+{% block fab %}
+
+{% endblock %}
+{% for course in courses %}
 <div class="row">
     <div class="col s12 m12 l4">
             <div class="card">
@@ -12,7 +15,7 @@ My Dashboard | Welcome
                     </div>-->
                     <div class="card-content">
                         <span class="card-title activator grey-text text-darken-4">{{course.name}}<i class="material-icons right">more_vert</i></span>
-                        <p><a href="{{url_for('main.user_checkpoints')}}">View Course</a></p>
+                        <p><a href="{{url_for('main.add_tasks', id=course.id)}}">View Course</a></p>
                     </div>
                     <div class="card-reveal">
                         <span class="card-title grey-text text-darken-4">4 Checkpoints<i class="material-icons right">close</i></span>
@@ -21,7 +24,4 @@ My Dashboard | Welcome
   </div>
     </div>
     {% endfor%}
-</div>
-
-
 {% endblock %}

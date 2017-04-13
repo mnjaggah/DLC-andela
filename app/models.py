@@ -17,9 +17,11 @@ class User(db.Model, UserMixin):
     password_hash = db.Column(db.String)
     is_admin = db.Column(db.Boolean, default=False)
     is_learner = db.Column(db.Boolean, default=True)
+    is_facilitator = db.Column(db.Boolean, default=False)
     course_id = db.Column(db.Integer, db.ForeignKey('courses.id'))
     task_id = db.Column(db.Integer, db.ForeignKey('tasks.id'))
     my_courses = db.Column(db.PickleType)
+    facilitator = db.Column(db.String(120), db.ForeignKey('facilitator.email'))
 
     @property
     def password(self):
@@ -71,4 +73,10 @@ class Course(db.Model):
 
 
 
-
+class Facilitator(db.Model, UserMixin):
+    __tablename__ = 'facilitator'
+    id = db.Column(db.Integer, primary_key=True)
+    first_name = db.Column(db.String(64), unique=False)
+    last_name = db.Column(db.String(64), unique=False)
+    email = db.Column(db.String(120), unique=True)
+    learner = db.relationship('User', backref='facilitators', lazy='dynamic') 

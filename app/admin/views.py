@@ -104,6 +104,6 @@ def add_tasks(id):
         if not course_id:
             # courses = Course.query.all()
             tasks = Tasks.query.filter_by(course_id=id)
-            return render_template('user_courses.html', tasks=tasks,course_id=id)
+            return redirect(url_for('main.user_checkpoints'))
         form = TasksForm()
         return render_template('add_task.html', course_id=id, form=form)

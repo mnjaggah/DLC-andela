@@ -25,8 +25,7 @@
         <div class="main">
             <div class="header-container">
                 <ul id="dropdown1" class="dropdown-content">
-                    <li><a href="#!">one</a></li>
-                    <li><a href="#!">two</a></li>
+                    <li><a href="#!">My account</a></li>
                     <li class="divider"></li>
                     <li><a href="{{ url_for('auth.logout')}}">Log out</a></li>
                 </ul>
@@ -89,18 +88,25 @@
                         <li><a class="waves-effect" class="subheader">Get Started</a></li>
                         {% if current_user.is_learner%}
                         <li><a class="waves-effect" href="{{url_for('main.dashboard')}}"><i class="material-icons left">school</i>Courses</a></li>
+                        {% elif current_user.is_facilitator %}
+                        <li><a class="waves-effect"href="{{url_for('main.get_learner')}}"><i class="material-icons left">bubble_chart</i>My Learners</a></li>
                         {%else%}
                         <li><a class="waves-effect"href="#"><i class="material-icons left">dashboard</i>Dashboard</a></li>
                         {% endif %}
                         {% if current_user.is_learner%}
-                        <li><a class="waves-effect"href="{{url_for('main.user_tasks')}}"><i class="material-icons left">flash_on</i>Current</a></li>
+                        <li><a class="waves-effect"href="#"><i class="material-icons left">flash_on</i>Current</a></li>
+                        {% elif current_user.is_facilitator %}
+                        <li><a class="waves-effect"href="#"><i class="material-icons left">people</i>Add Facilitators</a></li>
                         {%else%}
-                        <li><a class="waves-effect"href="#"><i class="material-icons left">bubble_chart</i>Learners</a></li>
+                        <li><a class="waves-effect"href="{{url_for('main.get_learner')}}"><i class="material-icons left">bubble_chart</i>Learners</a></li>
                         {% endif %}
-                        {% if current_user.is_learner%}                        
-                        <li><a class="waves-effect" href="{{url_for('main.user')}}"><i class="material-icons left">account_circle</i>Profile</a></li>
+                        
+                        {% if current_user.is_learner%}   
+                        {% if current_user.is_facilitator%}                     
+                        <li><a class="waves-effect" href="#"><i class="material-icons left">account_circle</i>Profile</a></li>
                         {%else%}
                         <li><a class="waves-effect"href="#"><i class="material-icons left">people</i>Facilitators</a></li>
+                        {% endif %}
                         {% endif %}
                         <li><a href="#"><i class="material-icons left">forum</i>Forum</a></li>
                         <li><a href="#"><i class="material-icons left">notifications</i>Notifications</a></li>
@@ -157,7 +163,7 @@
                 <script type="text/javascript" src="../static/main.js"></script>
                 <script type="text/javascript" src="../static/materialize.min.js"></script>
                 
-                <script>
+                <!--<script>
                     // Toast Notification
                     $(window).load(function () {
                         setTimeout(function () {
@@ -167,7 +173,7 @@
                         }, 1800);
 
                     });
-                </script>
+                </script>-->
                 {% block content %}
 {% endblock %}
     </body>

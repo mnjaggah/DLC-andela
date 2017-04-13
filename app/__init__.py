@@ -27,7 +27,7 @@ from .auth import auth as auth_blueprint
 app.register_blueprint(auth_blueprint, url_prefix='/auth')
 
 from .admin import admin as admin_blueprint
-app.register_blueprint(admin_blueprint, url_prefix='/admin')
+app.register_blueprint(admin_blueprint)
 
 from .facilitator import facilitator as facilitator_blueprint
 app.register_blueprint(facilitator_blueprint, url_prefix='/facilitator')

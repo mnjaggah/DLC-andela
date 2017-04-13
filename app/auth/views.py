@@ -15,6 +15,9 @@ def login():
             login_user(user)
             if user.is_admin:
                 return redirect(url_for('main.admin_dashboard'))
+
+            elif user.is_facilitator:
+                return redirect(url_for('main.facilitator_dashboard'))     
             else:
                 return redirect(url_for('main.dashboard'))
             flash('Logged in successfully')
