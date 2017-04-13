@@ -1,3 +1,4 @@
+   
 {% extends "base.html" %}
 {% block title %}
 My Dashboard | Welcome
@@ -5,12 +6,32 @@ My Dashboard | Welcome
 {% block content %}
 {% block fab %}
 
-
-
-
-
-
-
-
-
 {% endblock %}
+ {% for f in facilitator %} 
+   
+   <body class="white">
+    <table class="bordered centered striped">
+        <thead>
+          <tr>
+              <th>Name</th>
+              <th>Email</th>
+              <th>Level</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr>
+            <td>{{f.first_name}}</td>
+            <td>{{f.email}}</td>
+            <td>Proffessional</td>
+            
+          </tr>
+         
+        </tbody>
+      </table>
+       {% endfor %}
+   </body>
+
+  
+
+      {% endblock %}

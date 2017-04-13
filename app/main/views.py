@@ -96,6 +96,7 @@ def delete_course(id):
     flash('You have successfully deleted the course.')
     # redirect to the courses page
     return redirect(url_for('main.admin_dashboard'))
+
 @main.route('/admin/all_learners')
 @login_required
 def get_learner():
@@ -108,6 +109,20 @@ def get_learner():
                            user=user,
                            email="email"
                            )  
+
+
+@main.route('/admin/all_facilitators')
+@login_required
+def get_facilitator():
+    """
+    Method to get a random facilitator
+    """
+    facilitator = Facilitator.query.all()
+
+    return render_template('all_facilitators.html',
+                           facilitator=facilitator,
+                           email="email"
+                           )                           
 
 def get_facilitator():
     """
@@ -162,18 +177,17 @@ def add_facilitator():
         except:
             flash('Facilitator email already exists.')
 
-        return redirect(url_for('view_facilitators'))
+        return redirect(url_for('main.admin_dashboard'))
     return render_template(
         'add_facilitator.html', form=form)
 
 
-@main.route('/facilitators', methods=['GET', 'POST'])
+@main.route('/admin/facilitators', methods=['GET', 'POST'])
 @login_required
 def view_facilitators():
     """
     Function to view all facilitators
     """
-    check_admin()
 
     all_facilitators = Facilitator.query.all()
     return render_template('all_facilitators.html',

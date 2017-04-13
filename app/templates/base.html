@@ -108,7 +108,11 @@
                         {%else%}
                         <li><a class="waves-effect"href="{{url_for('main.add_facilitator')}}"><i class="material-icons left">people</i>Add Facilitators</a></li>
                         {% endif %}
+                        {% if current_user.is_admin%}
+                        <li><a href="{{url_for('main.get_facilitator')}}"><i class="material-icons left">forum</i>Facilitators</a></li>
+                        {%else%}
                         <li><a href="#"><i class="material-icons left">forum</i>Forum</a></li>
+                        {% endif %}
                         <li><a href="#"><i class="material-icons left">notifications</i>Notifications</a></li>
 
                         <li>
