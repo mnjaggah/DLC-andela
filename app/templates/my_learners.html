@@ -1,0 +1,57 @@
+{% import "bootstrap/wtf.html" as wtf %}
+{% extends "base.html" %}
+{% block title %}Facilitators Dashboard{% endblock %}
+{% block content %}
+<div class="content-section">
+  <br/><br/>
+  <div class="center">
+    <h4>Assigned Learners</h4>
+    <br/>
+    <table class="table table-bordered">
+     <thead>
+        <tr>
+            <th width="10%"> Username</th>
+            <th width="10%"> Email</th>
+            <th width="10%"> Current Course</th>
+            <th width="10%"> Current Task</th>
+            <th width="10%"> Task Status</th>
+            <th width="10%"> Approve</th>
+        </tr>
+     </thead>
+     {% if my_learners %} 
+     <tbody>
+        {% for learner in my_learners %}
+        <tr>
+            <td>{{learner.username}}</td>
+            <td>{{learner.email}}</td>
+            <td>{{learner.course.name}}</td>
+            <td>{{learner.task.name}}</td>
+            <td>
+            {% if learner.target.is_done == True %}
+            Complete
+            {% else %}
+            In progress
+            {% endif %}
+            </td>
+           <td class="td-actions">
+                      {% if learner.target.is_done==True %}
+                       <button type="button" class="btn btn-lg btn-primary" active>Approve</button> 
+                      {% elif learner.target.is_done==False %}
+                      <button type="button" class="btn btn-lg btn-primary" disabled>Approve</button>
+                  
+                      {% endif %} 
+
+            </td>
+
+        <br/><br/>
+        <div class="center">
+          {% endfor %}
+     </tbody>
+     {% else %}
+     <p>No Learners under maz@andela.com</p>
+     {% endif %}
+    </table>
+  </div> 
+</div> 
+{% endblock %}   
+
