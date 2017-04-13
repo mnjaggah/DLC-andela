@@ -3,7 +3,7 @@ import random
 from flask import Flask, render_template, url_for, request, redirect, url_for, flash, abort
 from flask_login import login_required, login_user, logout_user, current_user
 from app import app, db, login_manager
-from .forms import SigninForm, SignupForm, AddFacilitatorsForm, FacilitatorLoginForm
+from .forms import SigninForm, SignupForm, AddFacilitatorsForm, FacilitatorLoginForm, FeedbackForm
 from .models import User, Facilitator
 
 
@@ -142,11 +142,19 @@ def view_facilitators():
         )
 
 
-@app.route('/facilitator/dashboard', methods=['GET','POST'])
+"""@app.route('/facilitator/dashboard', methods=['GET','POST'])
 @login_required
-def facilitator_dashboard():
-    return render_template('facilitators_dashboard.html', title="Dashboard")
+def feedback_comments():
+    form = FeedbackForm()
+    if form.validate_on_submit():
+        comment = Comments(
+            comment = form.comment.data
+        )
+        db.session.add(comment)
+        db.session.commit()
 
+    return render_template('facilitators_dashboard.html', title="Dashboard")
+"""
 
 
 @app.route('/facilitator/all_learners', methods=['GET','POST'])
@@ -156,7 +164,10 @@ def view_allocated_learners():
     This function lists all learners allocated
     to a facilitator
     """
-    my_learners = User.query.filter_by(facilitator='maz@andela.com').all()
+    my_learners = User.query.filter_by(facilitator="maz@andela.com").all()
 
+
+    #my_learners = User.query.all()
+        
     return render_template('my_learners.html', my_learners=my_learners)
 

@@ -1,5 +1,5 @@
 from flask_wtf import Form
-from wtforms.fields import StringField, PasswordField, BooleanField, SubmitField
+from wtforms.fields import StringField, TextField, PasswordField, BooleanField, SubmitField
 from wtforms.validators import DataRequired, url, Length, Email, Regexp, EqualTo
 from wtforms import ValidationError
 from wtforms.fields.html5 import URLField
@@ -54,6 +54,9 @@ class FacilitatorLoginForm(Form):
     email = StringField('Email', validators=[DataRequired(), Email()])
     submit = SubmitField('Login')
 
+class FeedbackForm(Form):
+    comment = TextField('comment', validators=[DataRequired()])
+    submit = SubmitField('save')
 
 
 
